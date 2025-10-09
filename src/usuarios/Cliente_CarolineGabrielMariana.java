@@ -37,8 +37,18 @@ public class Cliente_CarolineGabrielMariana extends Usuario_CarolineGabrielMaria
 
     @Override
     public String toString() {
-       return String.format("{codigoUsuario=%d,nome=%s, cpf=%s, rg=%s, dataNascimento=%s, endereco=%s, cep=%s, telefone=%s, email=%s, dataCadastro=%s}",
-                             codigoUsuario, nome, cpf, rg, dataNascimento.toString(), endereco, cep, telefone, email, dataCadastro.toString());  
+        return "{" +
+        "\n Código de Usuário: " + this.codigoUsuario + 
+        "\n Nome: " + this.nome + 
+        "\n CPF: " + this.cpf +
+        "\n RG: " + this.rg +
+        "\n Data de Nascimento: " + (dataNascimento != null ? dataNascimento.toString() : "null") +
+        "\n Endereço: " + this.endereco +
+        "\n CEP: " + this.cep + 
+        "\n Telefone: " + this.telefone +
+        "\n E-mail: " + this.email +
+        "\n Data de Cadastro: " + (this.dataCadastro != null ? dataNascimento.toString() : "null") +
+        "\n}";
     }
     
     

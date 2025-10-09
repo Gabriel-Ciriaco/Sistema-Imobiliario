@@ -88,10 +88,12 @@ public class Seguro_CarolineGabrielMariana
     @Override
     public String toString()
     {
-        return "Código do seguro: " + this.getCodigoSeguro() + 
+        return "{" +
+                "\nCódigo do seguro: " + this.getCodigoSeguro() + 
                 "\n Nome da seguradora: " + this.getNomeSeguradora() +
                 "\n Tipo do seguro: " + this.getTipo() +
                 "\n Descrição do seguro: " + this.getDescricao() +
-                "\n Valor do seguro: " + this.getValor();
+                "\n Valor do seguro: " + this.getValor() +
+                "\n}";
     }
 }

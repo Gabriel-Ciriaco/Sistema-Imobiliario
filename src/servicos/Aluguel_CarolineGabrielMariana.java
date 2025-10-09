@@ -48,7 +48,7 @@ public class Aluguel_CarolineGabrielMariana
 
         this.formaPagamento = null;
 
-        this.segurosContratados = null;
+        this.segurosContratados = new ArrayList<Seguro_CarolineGabrielMariana>();
 
         this.finalizado = false;
 
@@ -264,7 +264,8 @@ public class Aluguel_CarolineGabrielMariana
             stringSeguros.append("O imóvel não possui nenhum seguro!");
         }
 
-        return "Código do aluguel: " + this.getCodigoAluguel() +
+        return "{" + 
+        "\n Código do aluguel: " + this.getCodigoAluguel() +
         "\n Cliente: " + this.getCliente().getNome() +
         "\n Corretor: " + this.getCorretor().getNome() +
         "\n Imóvel: " + this.getImovel().getCodigoImovel() +
@@ -275,6 +276,7 @@ public class Aluguel_CarolineGabrielMariana
         "\n Forma de pagamento do aluguel: " + this.getFormaPagamento() +
         "\n Seguros Contratados:\n" + stringSeguros + 
         "\n Aluguel finalizado? " + this.isFinalizado() +
-        "\n Aluguel está pago? " + this.isPago();
+        "\n Aluguel está pago? " + this.isPago() +
+        "\n}";
     }
 }

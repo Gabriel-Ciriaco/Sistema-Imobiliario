@@ -143,14 +143,16 @@ public class Venda_CarolineGabrielMariana
     @Override
     public String toString() 
     {
-        return "Código da venda: " + this.getCodigoVenda() +
+        return "{" + 
+        "\nCódigo da venda: " + this.getCodigoVenda() +
         "\n Cliente: " + this.getCliente().getNome() +
         "\n Corretor: " + this.getCorretor().getNome() + 
         "\n Imóvel: " + this.getImovel().getId() + 
         "\n Data da venda: " + this.getDataVenda() +
         "\n Valor total da venda: " + this.getValorTotalVenda() +
         "\n Forma de pagamento: " + this.getFormaPagamento() +
-        "\n Venda finalizada? " + this.isFinalizada();
+        "\n Venda finalizada? " + this.isFinalizada() +
+        "\n}";
     }
 
     

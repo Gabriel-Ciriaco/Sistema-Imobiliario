@@ -83,22 +83,20 @@ public class Corretor_CarolineGabrielMariana extends Usuario_CarolineGabrielMari
 
     @Override
     public String toString() {
-       return String.format(
-                            java.util.Locale.US,
-                            "{codigoUsuario=%d, nome=%s, cpf=%s, rg=%s, dataNascimento=%s, endereco=%s, cep=%s, telefone=%s, email=%s, creci=%s, salario=%.2f, pis=%s, dataAdmissao=%s}",
-                             codigoUsuario,
-                             nome,
-                             cpf,
-                             rg,
-                             dataNascimento.toString(),
-                             endereco,
-                             cep,
-                             telefone,
-                             email,
-                             creci,
-                             salario,
-                             pis,
-                             dataAdmissao.toString());  
+        return "{" +
+        "\n Código de Usuário: " + this.codigoUsuario + 
+        "\n Nome: " + this.nome + 
+        "\n CPF: " + this.cpf +
+        "\n RG: " + this.rg +
+        "\n Data de Nascimento: " + (dataNascimento != null ? dataNascimento.toString() : "null") +
+        "\n Endereço: " + this.endereco +
+        "\n CEP: " + this.cep + 
+        "\n Telefone: " + this.telefone +
+        "\n E-mail: " + this.email +
+        "\n CRECI: " + this.creci +
+        "\n Salário: " + this.salario + 
+        "\n PIS: " + this.pis +
+        "\n Data de Admissão: " + this.dataAdmissao.toString() +
+        "\n}";
     }
-    
 }
