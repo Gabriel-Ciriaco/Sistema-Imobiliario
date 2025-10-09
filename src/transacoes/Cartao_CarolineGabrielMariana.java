@@ -7,6 +7,17 @@ public class Cartao_CarolineGabrielMariana extends Pagamento_CarolineGabrielMari
     private String bandeira;
     private String numero;
 
+    public Cartao_CarolineGabrielMariana()
+    {
+        super("cartao");
+
+        this.nome = "";
+
+        this.bandeira = "";
+
+        this.numero = "";
+    }
+
     public Cartao_CarolineGabrielMariana(String nome, 
                                         String bandeira, 
                                         String numero) 

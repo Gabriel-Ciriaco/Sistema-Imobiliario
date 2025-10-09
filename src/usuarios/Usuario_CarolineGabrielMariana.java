@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 
 
-public class Usuario_CarolineGabrielMariana  implements Serializable
+public class Usuario_CarolineGabrielMariana implements Serializable
 {
     // Versão da classe serializável.
     private static final long serialVersionUID = 1L;
@@ -31,8 +31,31 @@ public class Usuario_CarolineGabrielMariana  implements Serializable
     protected String email;
 
 
-    public Usuario_CarolineGabrielMariana(int codigoUsuario, String nome, String cpf, String rg, LocalDate dataNascimento, String endereco,
-            String cep, String telefone, String email)
+    public Usuario_CarolineGabrielMariana()
+    {
+        this.codigoUsuario = 0;
+
+        this.nome = "";
+
+        this.cpf = "";
+
+        this.rg = "";
+
+        this.dataNascimento = null;
+
+        this.endereco = "";
+
+        this.cep = "";
+
+        this.telefone = "";
+
+        this.email = "";
+    }
+
+    public Usuario_CarolineGabrielMariana(
+            int codigoUsuario, String nome, String cpf, String rg, LocalDate dataNascimento, String endereco,
+            String cep, String telefone, String email
+        )
     {
         this.codigoUsuario = codigoUsuario;
         this.nome = nome;
@@ -172,7 +195,7 @@ public class Usuario_CarolineGabrielMariana  implements Serializable
     }
 
 
-
+    @Override
     public String toString()
     {
         return String.format("{codigoUsuario=%d, nome=%s, cpf=%s, rg=%s, dataNascimento=%s, endereco=%s, cep=%s, telefone=%s, email=%s}",

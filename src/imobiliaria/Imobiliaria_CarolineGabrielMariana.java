@@ -2,7 +2,18 @@ package imobiliaria;
 
 import java.util.ArrayList;
 
-import usuarios.Usuario_CarolineGabrielMariana;
+import configuracoes.Configuracao_CarolineGabrielMariana;
+import configuracoes.Desserializador_CarolineGabrielMariana;
+import imoveis.Imovel_CarolineGabrielMariana;
+
+import servicos.Aluguel_CarolineGabrielMariana;
+import servicos.Seguro_CarolineGabrielMariana;
+import servicos.Venda_CarolineGabrielMariana;
+
+import usuarios.Cliente_CarolineGabrielMariana;
+import usuarios.Corretor_CarolineGabrielMariana;
+
+
 
 public class Imobiliaria_CarolineGabrielMariana
 {
@@ -10,13 +21,153 @@ public class Imobiliaria_CarolineGabrielMariana
     
     private String endereco;
 
-    /*
-     * TO-DO: Finalizar os outros array lists.
-    */
 
-    private ArrayList<Usuario_CarolineGabrielMariana> clientes;
+    private ArrayList<Aluguel_CarolineGabrielMariana> alugueis;
 
-    private ArrayList<Usuario_CarolineGabrielMariana> corretores;
+    private ArrayList<Venda_CarolineGabrielMariana> vendas;
+
+    private ArrayList<Imovel_CarolineGabrielMariana> imoveis;
+
+    private ArrayList<Cliente_CarolineGabrielMariana> clientes;
+
+    private ArrayList<Corretor_CarolineGabrielMariana> corretores;
+
+    private ArrayList<Seguro_CarolineGabrielMariana> seguros;
+
+    private Configuracao_CarolineGabrielMariana configuracoes;
+
+
+    public Imobiliaria_CarolineGabrielMariana()
+    {
+        this.nome = "";
+
+        this.endereco = "";
+
+        this.configuracoes = new Configuracao_CarolineGabrielMariana();
+
+        this.alugueis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoAlugueis());
+
+        this.vendas = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoVendas());
+
+        this.imoveis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoImoveis());
+        
+        this.clientes = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoClientes());
+        
+        this.corretores = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoCorretores());
+
+        this.seguros = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoSeguros());
+    }
+
+    
+
+    public Imobiliaria_CarolineGabrielMariana(
+            String nome, String endereco,
+            ArrayList<Aluguel_CarolineGabrielMariana> alugueis, ArrayList<Venda_CarolineGabrielMariana> vendas,
+            ArrayList<Imovel_CarolineGabrielMariana> imoveis, ArrayList<Cliente_CarolineGabrielMariana> clientes,
+            ArrayList<Corretor_CarolineGabrielMariana> corretores, ArrayList<Seguro_CarolineGabrielMariana> seguros,
+            Configuracao_CarolineGabrielMariana configuracoes
+        )
+    {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.alugueis = alugueis;
+        this.vendas = vendas;
+        this.imoveis = imoveis;
+        this.clientes = clientes;
+        this.corretores = corretores;
+        this.seguros = seguros;
+        this.configuracoes = configuracoes;
+    }
+
+
+    public String getNome() {
+        return nome;
+    }
+
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+
+    public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueis() {
+        return alugueis;
+    }
+
+
+    public void setAlugueis(ArrayList<Aluguel_CarolineGabrielMariana> alugueis) {
+        this.alugueis = alugueis;
+    }
+
+
+    public ArrayList<Venda_CarolineGabrielMariana> getVendas() {
+        return vendas;
+    }
+
+
+    public void setVendas(ArrayList<Venda_CarolineGabrielMariana> vendas) {
+        this.vendas = vendas;
+    }
+
+
+    public ArrayList<Imovel_CarolineGabrielMariana> getImoveis() {
+        return imoveis;
+    }
+
+
+    public void setImoveis(ArrayList<Imovel_CarolineGabrielMariana> imoveis) {
+        this.imoveis = imoveis;
+    }
+
+
+    public ArrayList<Cliente_CarolineGabrielMariana> getClientes() {
+        return clientes;
+    }
+
+
+    public void setClientes(ArrayList<Cliente_CarolineGabrielMariana> clientes) {
+        this.clientes = clientes;
+    }
+
+
+    public ArrayList<Corretor_CarolineGabrielMariana> getCorretores() {
+        return corretores;
+    }
+
+
+    public void setCorretores(ArrayList<Corretor_CarolineGabrielMariana> corretores) {
+        this.corretores = corretores;
+    }
+
+
+    public ArrayList<Seguro_CarolineGabrielMariana> getSeguros() {
+        return seguros;
+    }
+
+
+    public void setSeguros(ArrayList<Seguro_CarolineGabrielMariana> seguros) {
+        this.seguros = seguros;
+    }
+
+
+    public Configuracao_CarolineGabrielMariana getConfiguracoes() {
+        return configuracoes;
+    }
+
+
+    public void setConfiguracoes(Configuracao_CarolineGabrielMariana configuracoes) {
+        this.configuracoes = configuracoes;
+    }
 
     
 }

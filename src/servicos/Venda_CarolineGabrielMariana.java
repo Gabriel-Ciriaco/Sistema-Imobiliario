@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import usuarios.Cliente_CarolineGabrielMariana;
 import usuarios.Corretor_CarolineGabrielMariana;
+import transacoes.Cartao_CarolineGabrielMariana;
 import transacoes.Pagamento_CarolineGabrielMariana;
 
 import imoveis.Imovel_CarolineGabrielMariana;
@@ -19,6 +20,26 @@ public class Venda_CarolineGabrielMariana
     private float valorTotalVenda;
     private Pagamento_CarolineGabrielMariana formaPagamento;
     private boolean finalizada;
+
+
+    public Venda_CarolineGabrielMariana()
+    {
+        this.codigoVenda = 0;
+
+        this.cliente = new Cliente_CarolineGabrielMariana();
+
+        this.corretor = new Corretor_CarolineGabrielMariana();
+
+        this.imovel = new Imovel_CarolineGabrielMariana();
+
+        this.dataVenda = null;
+
+        this.valorTotalVenda = 0.0f;
+
+        this.formaPagamento = new Cartao_CarolineGabrielMariana();
+
+        this.finalizada = false;
+    }
 
     public Venda_CarolineGabrielMariana(int codigoVenda, 
                                         Cliente_CarolineGabrielMariana cliente,

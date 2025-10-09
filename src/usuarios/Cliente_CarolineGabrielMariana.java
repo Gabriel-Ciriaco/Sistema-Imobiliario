@@ -7,8 +7,17 @@ public class Cliente_CarolineGabrielMariana extends Usuario_CarolineGabrielMaria
 {
     protected LocalDate dataCadastro;
 
-    public Cliente_CarolineGabrielMariana(int codigoUsuario, String nome, String cpf, String rg, LocalDate dataNascimento, String endereco,
-            String cep, String telefone, String email, LocalDate dataCadastro)
+    public Cliente_CarolineGabrielMariana()
+    {
+        super();
+
+        this.dataCadastro = null;
+    }
+
+    public Cliente_CarolineGabrielMariana(
+            int codigoUsuario, String nome, String cpf, String rg, LocalDate dataNascimento, String endereco,
+            String cep, String telefone, String email, LocalDate dataCadastro
+        )
     {
         super(codigoUsuario, nome, cpf, rg, dataNascimento, endereco, cep, telefone, email);
         this.dataCadastro = dataCadastro;

@@ -27,6 +27,34 @@ public class Aluguel_CarolineGabrielMariana
     private boolean finalizado;
     private boolean pago;
 
+    
+    public Aluguel_CarolineGabrielMariana()
+    {
+        this.codigoAluguel = 0;
+
+        this.cliente = new Cliente_CarolineGabrielMariana();
+
+        this.corretor = new Corretor_CarolineGabrielMariana();
+
+        this.imovel = new Imovel_CarolineGabrielMariana();
+
+        this.dataAluguel = null;
+
+        this.dataDevolucao = null;
+
+        this.dataPagamentoMensal = null;
+
+        this.valorTotalAluguel = 0.0f;
+
+        this.formaPagamento = null;
+
+        this.segurosContratados = null;
+
+        this.finalizado = false;
+
+        this.pago = false;
+    }
+
     public Aluguel_CarolineGabrielMariana(int codigoAluguel, 
                                         Cliente_CarolineGabrielMariana cliente,
                                         Corretor_CarolineGabrielMariana corretor, 

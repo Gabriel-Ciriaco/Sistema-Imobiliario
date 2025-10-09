@@ -5,6 +5,14 @@ public class Dinheiro_CarolineGabrielMariana extends Pagamento_CarolineGabrielMa
 
     private float valorEntregue;
 
+
+    public Dinheiro_CarolineGabrielMariana()
+    {
+        super("dinheiro");
+
+        this.valorEntregue = 0.0f;
+    }
+
     public Dinheiro_CarolineGabrielMariana(float valorEntregue) 
     {
         super("dinheiro");

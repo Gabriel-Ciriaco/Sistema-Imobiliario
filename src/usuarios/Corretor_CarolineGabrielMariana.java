@@ -14,9 +14,24 @@ public class Corretor_CarolineGabrielMariana extends Usuario_CarolineGabrielMari
     protected LocalDate dataAdmissao;
 
     
-    public Corretor_CarolineGabrielMariana(int codigoUsuario, String nome, String cpf, String rg, LocalDate dataNascimento, String endereco,
-            String cep, String telefone, String email, String creci, float salario, String pis,
-            LocalDate dataAdmissao)
+    public Corretor_CarolineGabrielMariana()
+    {
+        super();
+
+        this.creci = "";
+
+        this.salario = 0.0f;
+
+        this.pis = "";
+
+        this.dataAdmissao = null;
+    }
+
+    public Corretor_CarolineGabrielMariana(
+                int codigoUsuario, String nome, String cpf, String rg, LocalDate dataNascimento, String endereco,
+                String cep, String telefone, String email, String creci, float salario, String pis,
+                LocalDate dataAdmissao
+            )
     {
         super(codigoUsuario, nome, cpf, rg, dataNascimento, endereco, cep, telefone, email);
         this.creci = creci;

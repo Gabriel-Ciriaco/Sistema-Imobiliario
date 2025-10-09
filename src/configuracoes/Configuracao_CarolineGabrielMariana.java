@@ -15,6 +15,37 @@ public class Configuracao_CarolineGabrielMariana
 
     private String arquivoSeguros;
 
+    
+    public Configuracao_CarolineGabrielMariana()
+    {
+        this.arquivoAlugueis = "arquivos/alugueis.bin";
+
+        this.arquivoVendas = "arquivos/vendas.bin";
+        
+        this.arquivoImoveis = "arquivos/imoveis.bin";
+        
+        this.arquivoClientes = "arquivos/clientes.bin";
+        
+        this.arquivoCorretores = "arquivos/corretores.bin";
+        
+        this.arquivoSeguros = "arquivos/seguros.bin";
+    }
+
+    
+
+    public Configuracao_CarolineGabrielMariana (
+            String arquivoAlugueis, String arquivoVendas, String arquivoImoveis,
+            String arquivoClientes, String arquivoCorretores, String arquivoSeguros
+        )
+    {
+        this.arquivoAlugueis = arquivoAlugueis;
+        this.arquivoVendas = arquivoVendas;
+        this.arquivoImoveis = arquivoImoveis;
+        this.arquivoClientes = arquivoClientes;
+        this.arquivoCorretores = arquivoCorretores;
+        this.arquivoSeguros = arquivoSeguros;
+    }
+
 
     public String getArquivoAlugueis()
     {

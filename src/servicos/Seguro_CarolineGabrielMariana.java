@@ -8,6 +8,19 @@ public class Seguro_CarolineGabrielMariana
     private String descricao;
     private float valor;
 
+    public Seguro_CarolineGabrielMariana()
+    {
+        this.codigoSeguro = 0;
+
+        this.nomeSeguradora = "";
+
+        this.tipo = "";
+
+        this.descricao = "";
+
+        this.valor = 0.0f;
+    }
+
     public Seguro_CarolineGabrielMariana(int codigoSeguro, String nomeSeguradora, 
                                         String tipo, String descricao,float valor) 
     {
