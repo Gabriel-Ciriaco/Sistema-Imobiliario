@@ -53,7 +53,7 @@ public class Comercial_CarolineGabrielMariana extends Imovel_CarolineGabrielMari
                 "\n Area: " + getArea() +
                 "\n Numero de Quartos: " + getNumeroQuartos() +
                 "\n Valor: " + getValor() +
-                "\n Tipo Comercial: " + tipoComercial +
+                "\n Tipo de Comércio: " + tipoComercial +
                 "\n Numero de Salas: " + numeroSalas +
                 "\n}";
     }

@@ -69,14 +69,35 @@ public class Imobiliaria_CarolineGabrielMariana
         )
     {
         this.nome = nome;
+        
         this.endereco = endereco;
+
         this.alugueis = alugueis;
+
+
         this.vendas = vendas;
+
         this.imoveis = imoveis;
+
         this.clientes = clientes;
+
         this.corretores = corretores;
+
         this.seguros = seguros;
+
         this.configuracoes = configuracoes;
+
+        this.alugueis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoAlugueis());
+
+        this.vendas = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoVendas());
+
+        this.imoveis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoImoveis());
+        
+        this.clientes = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoClientes());
+        
+        this.corretores = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoCorretores());
+
+        this.seguros = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoSeguros());
     }
 
 
@@ -169,5 +190,22 @@ public class Imobiliaria_CarolineGabrielMariana
         this.configuracoes = configuracoes;
     }
 
+    public Imovel_CarolineGabrielMariana getImovel(String codigoImovel)
+    {
+        for (Imovel_CarolineGabrielMariana imovel : this.imoveis)
+        {
+            if (imovel.getCodigoImovel().equals(codigoImovel))
+            {
+                return imovel;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean removerImovel(Imovel_CarolineGabrielMariana imovel)
+    {        
+        return this.imoveis.remove(imovel);
+    }
     
 }

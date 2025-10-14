@@ -16,7 +16,7 @@ public class Serializador_CarolineGabrielMariana
         try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(caminhoArquivo)))
         {
             out.writeObject(objeto);
-            System.out.println("[SERIALIZADOR]: Objeto salvo com sucesso em: " + caminhoArquivo);
+            //System.out.println("[SERIALIZADOR]: Objeto salvo com sucesso em: " + caminhoArquivo);
         }
         catch (IOException error)
         {
