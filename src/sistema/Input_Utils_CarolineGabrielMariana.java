@@ -1,5 +1,6 @@
 package sistema;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.function.Function;
 
@@ -59,13 +60,21 @@ public class Input_Utils_CarolineGabrielMariana
                 ); // Essa função retorna o próprio argumento.
     }
 
-    public static double lerDouble(Scanner scanner, String mensagem)
+    public static float lerFloat(Scanner scanner, String mensagem)
     {
         return lerGenerico(
                     scanner,
                     mensagem,
                     "\n[INPUT-ERROR]: Entrada inválida. Por favor, digite um valor do tipo real.\n",
-                    Double::parseDouble);
+                    Float::parseFloat);
+    }
+
+    public static LocalDate lerLocalDate(Scanner scanner, String mensagem)
+    {
+        return lerGenerico(scanner,
+                           mensagem,
+                           "\n[INPUT-ERROR]: Entrada inválida. Digite a data no formato (YYYY-MM-DD)",
+                           LocalDate::parse);
     }
 
 

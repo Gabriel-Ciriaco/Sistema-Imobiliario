@@ -5,6 +5,7 @@ import configuracoes.Serializador_CarolineGabrielMariana;
 import imobiliaria.Imobiliaria_CarolineGabrielMariana;
 import imoveis.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,70 +71,80 @@ public class Sistema_CarolineGabrielMariana
         System.out.println("\n\nTipos de Imovel:");
 
         int tipo = Input_Utils_CarolineGabrielMariana.lerInt(scanner, 
-                                                    "1. Casa Residencial\n2. Comercial\nEscolha o tipo: "
+                                                    "1. Casa Residencial\n2. Prédio Residencial\n3. Comercial\nEscolha o tipo: "
                                                             );
                                                            
-        String codigo = Input_Utils_CarolineGabrielMariana.lerString(scanner,
-                                                            "Código do Imóvel: ",
-                                                                    false
-                                                                    );
-
+        int codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner,"Código do Imóvel: ");
+ 
         String endereco = Input_Utils_CarolineGabrielMariana.lerString(scanner,
                                                               "Endereço do Imóvel: ",
                                                          true
                                                                       );
 
-        Double area = Input_Utils_CarolineGabrielMariana.lerDouble(scanner,
-                                                          "Área do Imóvel: "
-                                                                  );
+        LocalDate dataConstrucao = Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
+         "Data de Construção (Formato: YYYY-MM-DD): ");
 
-        int quartos = Input_Utils_CarolineGabrielMariana.lerInt(scanner,
+        float areaTotal = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Área Total do Imóvel: ");
+        
+        float areaConstruida = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Área Construida do Imóvel: ");
+        
+        int qtdDormitorios = Input_Utils_CarolineGabrielMariana.lerInt(scanner,
                                                         "Número de Quartos: "
                                                                );
 
-        double valor = Input_Utils_CarolineGabrielMariana.lerDouble(scanner, 
-                                                           "Valor do Imóvel: "
-                                                                   );
+        int qtdBanheiros = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Número de Banheiros: ");
 
-        if (tipo == 1) 
-        {
-            String garagem = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Tem garagem? (sim/nao) ", true);
-            
-            while (!garagem.equals("sim") && !garagem.equals("nao"))
-            {
-                System.err.println("[INPUT-ERROR]: Por favor, responda somente com sim ou nao.");
+        int qtdVagasGaragem = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Número de Vagas de Garagem: ");
 
-                garagem = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Tem garagem? (sim/nao) ", true);
-            }
-            
-            String jardim = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Tem jardim? (sim/nao) ", true);
-            
-            while (!jardim.equals("sim") && !jardim.equals("nao"))
-            {
-                System.err.println("[INPUT-ERROR]: Por favor, responda somente com sim ou nao.");
+        float valorIPTU = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor do IPTU: ");
 
-                jardim = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Tem jardim? (sim/nao) ", true);
-            }
-            
-            CasaResidencial_CarolineGabrielMariana casa = new CasaResidencial_CarolineGabrielMariana(
-                codigo, endereco, area, quartos, valor, Boolean.parseBoolean(garagem), Boolean.parseBoolean(jardim));
-
-            imobiliaria.getImoveis().add(casa);
-        }
+        float valorVenda = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor de Venda: ");
         
-        else if (tipo == 2) 
-        {
-            String tipoComercial = Input_Utils_CarolineGabrielMariana.lerString(scanner, "\nTipo de Comércio: ", true);
-
-            int salas = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Número de salas: ");
-            
-            Comercial_CarolineGabrielMariana comercial = new Comercial_CarolineGabrielMariana(codigo,
-             endereco, area, quartos, valor, tipoComercial, salas);
-            
-            imobiliaria.getImoveis().add(comercial);
-        }
+        float valorAluguel = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor de Aluguel: ");
         
-        System.out.println("Imovel cadastrado com sucesso!");
+        Imovel_CarolineGabrielMariana novoImovel = null;
+
+        switch (tipo) {
+            case 1:
+                novoImovel =
+                 (CasaResidencial_CarolineGabrielMariana) new CasaResidencial_CarolineGabrielMariana(codigoImovel,
+                  endereco, dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, qtdVagasGaragem,
+                   valorIPTU, valorVenda, valorAluguel);
+
+                break;
+            
+            case 2:
+                int andar = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Andar do Imóvel: ");
+                int valorCondominio = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Valor do Condomínio: ");
+
+                novoImovel = (PredioResidencial_CarolineGabrielMariana) new PredioResidencial_CarolineGabrielMariana(
+                    codigoImovel, endereco, dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros,
+                     qtdVagasGaragem, valorIPTU, valorVenda, valorAluguel, andar, valorCondominio);
+
+                break;
+            
+            case 3:
+                float taxaImpostoFederal = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Taxa do Imposto Federal: ");
+    
+                novoImovel = (Comercial_CarolineGabrielMariana) new Comercial_CarolineGabrielMariana(codigoImovel, endereco,
+                 dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, qtdVagasGaragem,
+                  valorIPTU, valorVenda, valorAluguel, taxaImpostoFederal);
+
+                break;            
+            
+        }
+
+        if (novoImovel == null)
+            System.err.println("\n[CADASTRO-IMÓVEL-ERROR]: Houve algum erro interno ao cadastra o imóvel");
+
+        if (imobiliaria.getImoveis() != null)
+        {
+            imobiliaria.getImoveis().add(novoImovel);
+            System.out.println("Imovel cadastrado com sucesso!");
+        }
+        else
+            System.out.println(qtdVagasGaragem);
+        
     }
     
     
@@ -160,22 +171,22 @@ public class Sistema_CarolineGabrielMariana
 
     private void removerImovel()
     {
-        String codigoImovel = Input_Utils_CarolineGabrielMariana.lerString(
-            scanner, "\nDigite o código do Imóvel: ", false);
+        int codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(
+            scanner, "\nDigite o código do Imóvel: ");
         
         Imovel_CarolineGabrielMariana imovel = this.imobiliaria.getImovel(codigoImovel);
 
         if (imovel != null)
         {
             String resposta = Input_Utils_CarolineGabrielMariana.lerString(scanner, 
-                "Deseja remover o imóvel: '" + codigoImovel + "' (sim/nao) ", true);
+                "Deseja remover o imóvel: '" + codigoImovel + "' (sim/nao) ", false);
                 
             while (!resposta.equals("sim") && !resposta.equals("nao"))
             {
                 System.err.println("[INPUT-ERROR]: Por favor, responda somente com sim ou nao.");
 
                 resposta = Input_Utils_CarolineGabrielMariana.lerString(scanner, 
-                        "Deseja remover o imóvel: '" + codigoImovel + "' (sim/nao) ", true);
+                        "Deseja remover o imóvel: '" + codigoImovel + "' (sim/nao) ", false);
             }
 
             if (resposta.equals("sim"))
