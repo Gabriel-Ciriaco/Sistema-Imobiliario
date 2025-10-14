@@ -33,7 +33,7 @@ public class Venda_CarolineGabrielMariana
 
         this.dataVenda = null;
 
-        this.valorTotalVenda = imovel.getValor();
+        this.valorTotalVenda = imovel.getValorVenda();
 
         this.formaPagamento = new Cartao_CarolineGabrielMariana();
 
@@ -53,7 +53,7 @@ public class Venda_CarolineGabrielMariana
         this.corretor = corretor;
         this.imovel = imovel;
         this.dataVenda = dataVenda;
-        this.valorTotalVenda = imovel.getValor();
+        this.valorTotalVenda = imovel.getValorVenda();
         this.formaPagamento = formaPagamento;
         this.finalizada = finalizada;
     }

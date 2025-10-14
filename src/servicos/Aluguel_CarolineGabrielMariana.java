@@ -208,7 +208,7 @@ public class Aluguel_CarolineGabrielMariana
                 valorTotal += seguro.getValor();
             }
 
-            this.valorTotal = valorTotal;
+            this.valorTotalAluguel = valorTotal;
 
         }
 

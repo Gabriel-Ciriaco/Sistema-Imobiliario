@@ -190,11 +190,11 @@ public class Imobiliaria_CarolineGabrielMariana
         this.configuracoes = configuracoes;
     }
 
-    public Imovel_CarolineGabrielMariana getImovel(String codigoImovel)
+    public Imovel_CarolineGabrielMariana getImovel(int codigoImovel)
     {
         for (Imovel_CarolineGabrielMariana imovel : this.imoveis)
         {
-            if (imovel.getCodigoImovel().equals(codigoImovel))
+            if (imovel.getCodigoImovel() == codigoImovel)
             {
                 return imovel;
             }

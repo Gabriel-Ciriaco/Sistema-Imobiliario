@@ -2,24 +2,45 @@ package imoveis;
 
 import java.time.LocalDate;
 
-public class Comercial_CarolineGabrielMariana extends Imovel_CarolineGabrielMariana 
+public class PredioResidencial_CarolineGabrielMariana extends Imovel_CarolineGabrielMariana 
 {
-    protected float taxaImpostoFederal;
-    
-    public Comercial_CarolineGabrielMariana()
+    protected int andar;
+    protected float valorCondominio;
+
+
+    public PredioResidencial_CarolineGabrielMariana() 
     {
         super();
-        this.taxaImpostoFederal = 0.0f;
+
+        this.andar = 0;
+        this.valorCondominio = 0.0f;
     }
 
-    public Comercial_CarolineGabrielMariana(int codigoImovel, String endereco, LocalDate dataConstrucao,
+    public PredioResidencial_CarolineGabrielMariana(int codigoImovel, String endereco, LocalDate dataConstrucao,
             float areaTotal, float areaConstruida, int qtdDormitorios, int qtdBanheiros, int qtdVagasGaragem,
-            float valorIPTU, float valorVenda, float valorAluguel, float taxaImpostoFederal)
-    {
+            float valorIPTU, float valorVenda, float valorAluguel, int andar, float valorCondominio) {
         super(codigoImovel, endereco, dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros,
                 qtdVagasGaragem, valorIPTU, valorVenda, valorAluguel);
-    
-        this.taxaImpostoFederal = taxaImpostoFederal;
+     
+        this.andar = andar;
+        this.valorCondominio = valorCondominio;
+    }
+
+
+    public int getAndar() {
+        return andar;
+    }
+
+    public void setAndar(int andar) {
+        this.andar = andar;
+    }
+
+    public float getValorCondominio() {
+        return valorCondominio;
+    }
+
+    public void setValorCondominio(float valorCondominio) {
+        this.valorCondominio = valorCondominio;
     }
 
     public float getValorAluguel()
@@ -42,8 +63,8 @@ public class Comercial_CarolineGabrielMariana extends Imovel_CarolineGabrielMari
                 "\n Valor IPTU: " + this.valorIPTU +
                 "\n Valor Venda: " + this.valorVenda +
                 "\n Valor Aluguel: " + this.valorAluguel +
-                "\n Taxa Imposto Federal: " + this.taxaImpostoFederal +
+                "\n Número de Andares: " + this.andar +
+                "\n Valor do Condomínio: " + this.valorCondominio +
                 "\n}";
     }
-    
 }
