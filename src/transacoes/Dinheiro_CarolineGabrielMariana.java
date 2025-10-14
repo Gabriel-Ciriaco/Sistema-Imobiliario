@@ -3,36 +3,36 @@ package transacoes;
 public class Dinheiro_CarolineGabrielMariana extends Pagamento_CarolineGabrielMariana
 {
 
-    private float valorEntregue;
+   private String tipoDeMoeda;
 
 
     public Dinheiro_CarolineGabrielMariana()
     {
         super("dinheiro");
 
-        this.valorEntregue = 0.0f;
+        this.tipoDeMoeda = "";
     }
 
-    public Dinheiro_CarolineGabrielMariana(float valorEntregue) 
+    public Dinheiro_CarolineGabrielMariana(String tipoDeMoeda) 
     {
         super("dinheiro");
-        this.valorEntregue = valorEntregue;
+        this.tipoDeMoeda = tipoDeMoeda;
     }
 
-    public float getValorEntregue() 
+    public String getTipoDeMoeda() 
     {
-        return valorEntregue;
+        return tipoDeMoeda;
     }
 
-    public void setValorEntregue(float valorEntregue) 
+    public void setTipoDeMoeda(String tipoDeMoeda) 
     {
-        this.valorEntregue = valorEntregue;
+        this.tipoDeMoeda = tipoDeMoeda;
     }
 
     @Override
     public String toString() 
     {
-        return "Valor entregue: " + this.getValorEntregue();
+        return "Tipo de moeda: " + this.getTipoDeMoeda();
     }
     
 }

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import usuarios.Cliente_CarolineGabrielMariana;
 import usuarios.Corretor_CarolineGabrielMariana;
 import transacoes.Cartao_CarolineGabrielMariana;
-import transacoes.Pagamento_CarolineGabrielMariana;
 
 import imoveis.Imovel_CarolineGabrielMariana;
 
@@ -18,7 +17,7 @@ public class Venda_CarolineGabrielMariana
     private Imovel_CarolineGabrielMariana imovel;
     private LocalDate dataVenda;
     private float valorTotalVenda;
-    private Pagamento_CarolineGabrielMariana formaPagamento;
+    private Cartao_CarolineGabrielMariana formaPagamento;
     private boolean finalizada;
 
 
@@ -34,7 +33,7 @@ public class Venda_CarolineGabrielMariana
 
         this.dataVenda = null;
 
-        this.valorTotalVenda = 0.0f;
+        this.valorTotalVenda = imovel.getValor();
 
         this.formaPagamento = new Cartao_CarolineGabrielMariana();
 
@@ -46,8 +45,7 @@ public class Venda_CarolineGabrielMariana
                                         Corretor_CarolineGabrielMariana corretor, 
                                         Imovel_CarolineGabrielMariana imovel, 
                                         LocalDate dataVenda,
-                                        float valorTotalVenda, 
-                                        Pagamento_CarolineGabrielMariana formaPagamento, 
+                                        Cartao_CarolineGabrielMariana formaPagamento, 
                                         boolean finalizada) 
     {
         this.codigoVenda = codigoVenda;
@@ -55,7 +53,7 @@ public class Venda_CarolineGabrielMariana
         this.corretor = corretor;
         this.imovel = imovel;
         this.dataVenda = dataVenda;
-        this.valorTotalVenda = valorTotalVenda;
+        this.valorTotalVenda = imovel.getValor();
         this.formaPagamento = formaPagamento;
         this.finalizada = finalizada;
     }
@@ -120,12 +118,12 @@ public class Venda_CarolineGabrielMariana
         this.valorTotalVenda = valorTotalVenda;
     }
 
-    public Pagamento_CarolineGabrielMariana getFormaPagamento() 
+    public Cartao_CarolineGabrielMariana getFormaPagamento() 
     {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(Pagamento_CarolineGabrielMariana formaPagamento) 
+    public void setFormaPagamento(Cartao_CarolineGabrielMariana formaPagamento) 
     {
         this.formaPagamento = formaPagamento;
     }
@@ -147,15 +145,15 @@ public class Venda_CarolineGabrielMariana
         "\nCódigo da venda: " + this.getCodigoVenda() +
         "\n Cliente: " + this.getCliente().getNome() +
         "\n Corretor: " + this.getCorretor().getNome() + 
-        "\n Imóvel: " + this.getImovel().getId() + 
+        "\n Imóvel:" +
+        "\n    Código do Imóvel: " + this.getImovel().getCodigoImovel() +
+        "\n    Endereço do Imóvel: " + this.getImovel().getEndereco() +
         "\n Data da venda: " + this.getDataVenda() +
         "\n Valor total da venda: " + this.getValorTotalVenda() +
         "\n Forma de pagamento: " + this.getFormaPagamento() +
         "\n Venda finalizada? " + this.isFinalizada() +
         "\n}";
-    }
-
-    
+    }    
     
     
 }

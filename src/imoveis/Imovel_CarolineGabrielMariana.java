@@ -16,9 +16,9 @@ public class Imovel_CarolineGabrielMariana implements Serializable
     {
         this.codigoImovel = "";
         this.endereco = "";
-        this.area = 0.0;
+        this.area = 0.0f;
         this.numeroQuartos = 0;
-        this.valor = 0.0;
+        this.valor = 0.0f;
     }
 
     public Imovel_CarolineGabrielMariana(String codigoImovel, String endereco, double area, int numeroQuartos, double valor)

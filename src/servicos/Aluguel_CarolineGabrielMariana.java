@@ -157,11 +157,6 @@ public class Aluguel_CarolineGabrielMariana
         return valorTotalAluguel;
     }
 
-    public void setValorTotalAluguel(float valorTotalAluguel) 
-    {
-        this.valorTotalAluguel = valorTotalAluguel;
-    }
-
     public Pagamento_CarolineGabrielMariana getFormaPagamento() 
     {
         return formaPagamento;
@@ -213,7 +208,7 @@ public class Aluguel_CarolineGabrielMariana
                 valorTotal += seguro.getValor();
             }
 
-            return valorTotal;
+            this.valorTotal = valorTotal;
 
         }
 
@@ -268,7 +263,9 @@ public class Aluguel_CarolineGabrielMariana
         "\n Código do aluguel: " + this.getCodigoAluguel() +
         "\n Cliente: " + this.getCliente().getNome() +
         "\n Corretor: " + this.getCorretor().getNome() +
-        "\n Imóvel: " + this.getImovel().getCodigoImovel() +
+        "\n Imóvel:" +
+        "\n    Código do Imóvel: " + this.getImovel().getCodigoImovel() +
+        "\n    Endereço do Imóvel: " + this.getImovel().getEndereco() +
         "\n Data do aluguel: " + this.getDataAluguel() +
         "\n Data de Devolução: " + this.getDataDevolucao() +
         "\n Data do pagamento mensal: " + this.getDataPagamentoMensal() +
@@ -277,6 +274,7 @@ public class Aluguel_CarolineGabrielMariana
         "\n Seguros Contratados:\n" + stringSeguros + 
         "\n Aluguel finalizado? " + this.isFinalizado() +
         "\n Aluguel está pago? " + this.isPago() +
+        "\n Aluguel está atrasado? " + this.verificarAtraso() +
         "\n}";
     }
 }
