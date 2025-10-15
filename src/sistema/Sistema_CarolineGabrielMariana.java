@@ -4,8 +4,10 @@ import configuracoes.Serializador_CarolineGabrielMariana;
 
 import imobiliaria.Imobiliaria_CarolineGabrielMariana;
 import imoveis.*;
+import servicos.Aluguel_CarolineGabrielMariana;
 import servicos.Seguro_CarolineGabrielMariana;
 import transacoes.Cartao_CarolineGabrielMariana;
+import transacoes.Dinheiro_CarolineGabrielMariana;
 import transacoes.Pagamento_CarolineGabrielMariana;
 import usuarios.Cliente_CarolineGabrielMariana;
 import usuarios.Corretor_CarolineGabrielMariana;
@@ -291,24 +293,11 @@ public class Sistema_CarolineGabrielMariana
         
     }
 
-    private Seguro_CarolineGabrielMariana adicionarSeguro()
+    private ArrayList<Seguro_CarolineGabrielMariana> selecionarSeguros()
     {
         int codigoSeguro = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Seguro: ");
         
-        Seguro_CarolineGabrielMariana seguro_roubo = new Seguro_CarolineGabrielMariana(codigoSeguro, "Porto Seguro", 
-                                                    "Roubo", "Cobertura total contra roubo", 5000.0f);
-       
-        Seguro_CarolineGabrielMariana seguro_desastresNaturais = new Seguro_CarolineGabrielMariana(codigoSeguro, "Porto Seguro",
-                                                                "Desastres Naturais", "Cobertura contra enchentes, terremotos e deslizamentos", 
-                                                                7500.0f);
 
-        Seguro_CarolineGabrielMariana seguro_incendio = new Seguro_CarolineGabrielMariana(codigoSeguro, "Porto Seguro",
-                                                                "Incêndio", "Cobertura contra incêndios residenciais e comerciais", 
-                                                                6200.0f);
-                                
-        Seguro_CarolineGabrielMariana seguro_completo = new Seguro_CarolineGabrielMariana(codigoSeguro, "Porto Seguro",
-                                                        "Completo", "Cobertura total: roubo, incêndio, enchente, colisões e desastres naturais", 
-                                                        12000.0f);
 
         return null;
         
@@ -392,32 +381,41 @@ public class Sistema_CarolineGabrielMariana
 
         float valorTotalAluguel = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor Total do Aluguel: ");
 
-        int formaPagamento = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Digite a forma de Pagamento (1-Cartão e 2-Dinheiro): ");
+        int selecionarFormaPagamento = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Digite a forma de Pagamento (1-Cartão e 2-Dinheiro): ");
 
-        while (formaPagamento != 1 || formaPagamento != 2) 
+        Pagamento_CarolineGabrielMariana formaPagamento = null;
+
+        while (selecionarFormaPagamento != 1 || selecionarFormaPagamento != 2) 
         {
+            System.out.println("[ALUGAR-ERROR]: Por favor, digite um valor válido (1 ou 2).");
 
-            //TO-DO: Finalizar.
+            selecionarFormaPagamento = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Digite a forma de Pagamento (1-Cartão e 2-Dinheiro): ");
             
         }
-        switch (formaPagamento)
+        switch (selecionarFormaPagamento)
         {
             
             case 1:
 
-                Cartao_CarolineGabrielMariana cartao = cadastrarCartaoCliente();
+                formaPagamento = (Pagamento_CarolineGabrielMariana) cadastrarCartaoCliente();
+
                 break;
 
             case 2:
 
-            String tipoMoeda = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                String tipoMoeda = Input_Utils_CarolineGabrielMariana.lerString(scanner,
                     "Tipo da moeda: ",
                     true
                     );
-            break;
+
+                formaPagamento = (Pagamento_CarolineGabrielMariana) new Dinheiro_CarolineGabrielMariana(tipoMoeda);
+
+                break;
         }
 
-
+        Aluguel_CarolineGabrielMariana novoAluguel = new Aluguel_CarolineGabrielMariana(codigoAluguel, cliente, 
+                                                    corretor, imovel, dataAluguel, dataDevolucao, dataPagamentoMensal, 
+                                                    valorTotalAluguel, formaPagamento , this.selecionarSeguros(), false, false);
 
 
     }
