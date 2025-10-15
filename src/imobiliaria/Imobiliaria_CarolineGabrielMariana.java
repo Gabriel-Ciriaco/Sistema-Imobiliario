@@ -1,11 +1,14 @@
 package imobiliaria;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import configuracoes.Configuracao_CarolineGabrielMariana;
 import configuracoes.Desserializador_CarolineGabrielMariana;
+import imoveis.CasaResidencial_CarolineGabrielMariana;
+import imoveis.Comercial_CarolineGabrielMariana;
 import imoveis.Imovel_CarolineGabrielMariana;
-
+import imoveis.PredioResidencial_CarolineGabrielMariana;
 import servicos.Aluguel_CarolineGabrielMariana;
 import servicos.Seguro_CarolineGabrielMariana;
 import servicos.Venda_CarolineGabrielMariana;
@@ -222,6 +225,103 @@ public class Imobiliaria_CarolineGabrielMariana
         return null;
     }
 
+    public ArrayList<CasaResidencial_CarolineGabrielMariana> getCasasResidenciais()
+    {
+        ArrayList<CasaResidencial_CarolineGabrielMariana> casasResidenciais = new ArrayList<CasaResidencial_CarolineGabrielMariana>();
+
+        for (Imovel_CarolineGabrielMariana imovel : imoveis)
+        {
+            if (imovel instanceof CasaResidencial_CarolineGabrielMariana)
+                casasResidenciais.add((CasaResidencial_CarolineGabrielMariana) imovel);
+        }
+
+        return !casasResidenciais.isEmpty() ? casasResidenciais : null;
+    }
+
+    public ArrayList<PredioResidencial_CarolineGabrielMariana> getPredioResidenciais()
+    {
+        ArrayList<PredioResidencial_CarolineGabrielMariana> prediosResidenciais = new ArrayList<PredioResidencial_CarolineGabrielMariana>();
+
+        for (Imovel_CarolineGabrielMariana imovel : imoveis)
+        {
+            if (imovel instanceof PredioResidencial_CarolineGabrielMariana)
+                prediosResidenciais.add((PredioResidencial_CarolineGabrielMariana) imovel);
+        }
+
+        return !prediosResidenciais.isEmpty() ? prediosResidenciais : null;
+    }
+
+    public ArrayList<Comercial_CarolineGabrielMariana> getComerciais()
+    {
+        ArrayList<Comercial_CarolineGabrielMariana> comerciais = new ArrayList<Comercial_CarolineGabrielMariana>();
+
+        for (Imovel_CarolineGabrielMariana imovel : imoveis)
+        {
+            if (imovel instanceof Comercial_CarolineGabrielMariana)
+                comerciais.add((Comercial_CarolineGabrielMariana) imovel);
+        }
+
+        return !comerciais.isEmpty() ? comerciais : null;
+    }
+
+    public ArrayList<Imovel_CarolineGabrielMariana> getImoveisDisponiveisLocacao()
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveisDisponiveisLocacao = imoveis;
+        
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
+        {
+            imoveisDisponiveisLocacao.remove(aluguel.getImovel());
+        }
+
+        for (Venda_CarolineGabrielMariana venda : vendas)
+        {
+            imoveisDisponiveisLocacao.remove(venda.getImovel());
+        }
+
+        return !imoveisDisponiveisLocacao.isEmpty() ? imoveisDisponiveisLocacao : null;
+    }
+
+    public ArrayList<Imovel_CarolineGabrielMariana> getImoveisAlugados()
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveisAlugados = new ArrayList<Imovel_CarolineGabrielMariana>();
+
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
+        {
+            imoveisAlugados.add(aluguel.getImovel());
+        }
+
+        return !imoveisAlugados.isEmpty() ? imoveisAlugados : null;
+    }
+
+    public ArrayList<Imovel_CarolineGabrielMariana> getImoveisDisponiveisVenda()
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveisDisponiveisVenda = imoveis;
+        
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
+        {
+            imoveisDisponiveisVenda.remove(aluguel.getImovel());
+        }
+
+        for (Venda_CarolineGabrielMariana venda : vendas)
+        {
+            imoveisDisponiveisVenda.remove(venda.getImovel());
+        }
+
+        return !imoveisDisponiveisVenda.isEmpty() ? imoveisDisponiveisVenda : null;
+    }
+
+    public ArrayList<Imovel_CarolineGabrielMariana> getImoveisVendidos()
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveisVendidos = new ArrayList<Imovel_CarolineGabrielMariana>();
+
+        for (Venda_CarolineGabrielMariana venda : vendas)
+        {
+            imoveisVendidos.add(venda.getImovel());
+        }
+
+        return !imoveisVendidos.isEmpty() ? imoveisVendidos : null;
+    }
+
     public boolean removerImovel(Imovel_CarolineGabrielMariana imovel)
     {        
         return this.imoveis.remove(imovel);
@@ -279,18 +379,73 @@ public class Imobiliaria_CarolineGabrielMariana
         return !comprasCliente.isEmpty() ? comprasCliente : null;
     }
 
-    public ArrayList<Imovel_CarolineGabrielMariana> getImoveisCliente(int codigoUsuario)
+    public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueisAtrasados()
     {
-        ArrayList<Imovel_CarolineGabrielMariana> imoveisCliente = new ArrayList<Imovel_CarolineGabrielMariana>();
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueisAtrasados = new ArrayList<Aluguel_CarolineGabrielMariana>();
+
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
+        {
+            if (!aluguel.isFinalizado() &&
+                !aluguel.isPago() && 
+                aluguel.getDataPagamentoMensal().isBefore(LocalDate.now()))
+                {
+                    alugueisAtrasados.add(aluguel);
+                }
+        }
+
+        return !alugueisAtrasados.isEmpty() ? alugueisAtrasados : null;
+    }
+
+    public ArrayList<Cliente_CarolineGabrielMariana> getClientesAlugueisAtrasados()
+    {
+        ArrayList<Cliente_CarolineGabrielMariana> clientesAlugueisAtrasados = new ArrayList<Cliente_CarolineGabrielMariana>();
+
+        for (Aluguel_CarolineGabrielMariana aluguel : this.getAlugueisAtrasados())
+        {
+            clientesAlugueisAtrasados.add(aluguel.getCliente());
+        }
+
+        return !clientesAlugueisAtrasados.isEmpty() ? clientesAlugueisAtrasados : null;
+    }
+
+    public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueisFinalizados()
+    {
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueisFinalizados = new ArrayList<Aluguel_CarolineGabrielMariana>();
+        
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
+        {
+            if (aluguel.isFinalizado())
+                alugueisFinalizados.add(aluguel);
+        }
+
+        return !alugueisFinalizados.isEmpty() ? alugueisFinalizados : null;
+    }
+
+    public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueisPrazoLocacao()
+    {
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueisPrazoLocacao = new ArrayList<Aluguel_CarolineGabrielMariana>();
+        
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
+        {
+            if (aluguel.getDataDevolucao().isAfter(LocalDate.now()))
+                alugueisPrazoLocacao.add(aluguel);
+        }
+
+        return !alugueisPrazoLocacao.isEmpty() ? alugueisPrazoLocacao : null;
+    }
+
+    public ArrayList<Venda_CarolineGabrielMariana> getVendasMes(int mes)
+    {
+        ArrayList<Venda_CarolineGabrielMariana> vendasMes = new ArrayList<Venda_CarolineGabrielMariana>();
 
         for (Venda_CarolineGabrielMariana venda : vendas)
         {
-            if (venda.getCliente().getCodigoUsuario() == codigoUsuario)
-                imoveisCliente.add(venda.getImovel());
+            if (venda.getDataVenda().getMonth().getValue() == mes)
+                vendasMes.add(venda);
         }
 
-        return !imoveisCliente.isEmpty() ? imoveisCliente : null;
+        return !vendasMes.isEmpty() ? vendasMes : null;
     }
 
-    
+
 }
