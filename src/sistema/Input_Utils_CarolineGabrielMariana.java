@@ -65,7 +65,7 @@ public class Input_Utils_CarolineGabrielMariana
         return lerGenerico(
                     scanner,
                     mensagem,
-                    "\n[INPUT-ERROR]: Entrada inválida. Por favor, digite um valor do tipo real.\n",
+                    "\n[INPUT-ERROR]: Entrada inválida. Por favor, digite um valor do tipo real. Exemplo: 100.3 ou 100\n",
                     Float::parseFloat);
     }
 
@@ -73,7 +73,7 @@ public class Input_Utils_CarolineGabrielMariana
     {
         return lerGenerico(scanner,
                            mensagem,
-                           "\n[INPUT-ERROR]: Entrada inválida. Digite a data no formato (YYYY-MM-DD)",
+                           "\n[INPUT-ERROR]: Entrada inválida. Digite a data no formato (YYYY-MM-DD)\n",
                            LocalDate::parse);
     }
 

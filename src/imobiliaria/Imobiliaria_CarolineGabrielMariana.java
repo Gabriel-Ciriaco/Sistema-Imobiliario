@@ -58,7 +58,26 @@ public class Imobiliaria_CarolineGabrielMariana
         this.seguros = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoSeguros());
     }
 
-    
+    public Imobiliaria_CarolineGabrielMariana(String nome, String endereco)
+    {
+        this.nome = nome;
+
+        this.endereco = endereco;
+        
+        this.configuracoes = new Configuracao_CarolineGabrielMariana();
+
+        this.alugueis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoAlugueis());
+
+        this.vendas = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoVendas());
+
+        this.imoveis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoImoveis());
+        
+        this.clientes = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoClientes());
+        
+        this.corretores = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoCorretores());
+
+        this.seguros = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoSeguros());
+    }
 
     public Imobiliaria_CarolineGabrielMariana(
             String nome, String endereco,

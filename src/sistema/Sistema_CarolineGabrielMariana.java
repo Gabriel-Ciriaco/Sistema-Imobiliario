@@ -104,7 +104,8 @@ public class Sistema_CarolineGabrielMariana
         
         Imovel_CarolineGabrielMariana novoImovel = null;
 
-        switch (tipo) {
+        switch (tipo)
+        {
             case 1:
                 novoImovel =
                  (CasaResidencial_CarolineGabrielMariana) new CasaResidencial_CarolineGabrielMariana(codigoImovel,
@@ -115,7 +116,7 @@ public class Sistema_CarolineGabrielMariana
             
             case 2:
                 int andar = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Andar do Imóvel: ");
-                int valorCondominio = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Valor do Condomínio: ");
+                float valorCondominio = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor do Condomínio: ");
 
                 novoImovel = (PredioResidencial_CarolineGabrielMariana) new PredioResidencial_CarolineGabrielMariana(
                     codigoImovel, endereco, dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros,
@@ -143,7 +144,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("Imovel cadastrado com sucesso!");
         }
         else
-            System.out.println(qtdVagasGaragem);
+            System.out.println("\n[CADASTRAR-IMOVEL-ERROR]: Houve algum problema ao cadastrar o imóvel.\n");
         
     }
     
