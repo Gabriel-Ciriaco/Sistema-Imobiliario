@@ -4,6 +4,7 @@ import configuracoes.Serializador_CarolineGabrielMariana;
 
 import imobiliaria.Imobiliaria_CarolineGabrielMariana;
 import imoveis.*;
+import usuarios.Usuario_CarolineGabrielMariana;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -216,6 +217,31 @@ public class Sistema_CarolineGabrielMariana
     {
         Serializador_CarolineGabrielMariana.salvarObjeto(imobiliaria.getImoveis(), imobiliaria.getConfiguracoes().getArquivoImoveis());
         System.out.println("\nDados salvos com sucesso!");
+    }
+
+    private Usuario_CarolineGabrielMariana cadastrarUsuario()
+    {
+        int codigoUsuario = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Nome do Usuário: ");
+        
+        String nome = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Nome do Usuário: ", true);
+
+        String cpf = Input_Utils_CarolineGabrielMariana.lerString(scanner, "CPF: ", false);
+
+        String rg = Input_Utils_CarolineGabrielMariana.lerString(scanner, "RG: ", false);
+
+        LocalDate dataNascimento = Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
+        "Data de Nascimento (Formato: YYYY-MM-DD): ");
+
+        String endereco = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Endereço: ", true);
+        
+        String cep = Input_Utils_CarolineGabrielMariana.lerString(scanner, "CEP: ", true);
+        
+        String telefone = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Telefone: ", false);
+
+        String email = Input_Utils_CarolineGabrielMariana.lerString(scanner, "E-mail: ", false);
+
+        return new Usuario_CarolineGabrielMariana(
+            codigoUsuario, nome, cpf, rg, dataNascimento, endereco, cep, telefone, email);
     }
 
 }
