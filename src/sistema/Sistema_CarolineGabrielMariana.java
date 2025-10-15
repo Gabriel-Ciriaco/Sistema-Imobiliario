@@ -528,9 +528,72 @@ public class Sistema_CarolineGabrielMariana
         Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
 
     }
-    private void listarImoveisPredioResidencial() {}
-    private void listarImoveisComercial() {}
-    private void listarImoveisDisponiveisParaLocacao() {}
+    private void listarImoveisPredioResidencial()
+    {
+        ArrayList<PredioResidencial_CarolineGabrielMariana> prediosResidenciais = this.imobiliaria.getPredioResidenciais();
+
+        if (prediosResidenciais == null)
+        {
+            System.out.println("\n[LISTAR-PREDIOS-RESIDENCIAS]: Não há prédios residenciais cadastradas.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Prédios Residenciais  ---");
+
+        for (PredioResidencial_CarolineGabrielMariana predioResidencial : prediosResidenciais) 
+        {
+            System.out.println("\n" + predioResidencial.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarImoveisComercial()
+    {
+        ArrayList<Comercial_CarolineGabrielMariana> comerciais = this.imobiliaria.getComerciais();
+
+        if (comerciais == null)
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-COMERCIAIS]: Não há imóveis comerciais cadastradas.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Comerciais  ---");
+
+        for (Comercial_CarolineGabrielMariana comercial : comerciais) 
+        {
+            System.out.println("\n" + comercial.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+
+    }
+
+    private void listarImoveisDisponiveisParaLocacao() 
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveis = this.imobiliaria.getImoveisDisponiveisLocacao();
+
+        if (imoveis == null)
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-DISPONIVEIS-PARA-LOCACAO]: Não há imóveis disponíveis para locação cadastradas.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Disponíveis para Locação  ---");
+
+        for (Imovel_CarolineGabrielMariana imovel : imoveis) 
+        {
+            System.out.println("\n" + imovel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+    
     private void listarImoveisAlugados() {}
     private void listarImoveisDisponiveisParaVenda() {}
     private void listarImoveisVendidos() {}
