@@ -42,7 +42,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("1. Cadastrar Corretor");
             System.out.println("2. Cadastrar Cliente");
             System.out.println("3. Cadastrar Imóvel");
-            System.out.println("4. Listar Imoveis");
+            System.out.println("4. Opções de Listagens");
             System.out.println("5. Remover Imóvel");
             System.out.println("6. Salvar Dados");
             System.out.println("0. Sair");
@@ -65,7 +65,7 @@ public class Sistema_CarolineGabrielMariana
                     salvarDados();
                     break;
                 case 4:
-                    listarImoveis();
+                    opcoesDeListagem();
                     break;
                 case 5:
                     removerImovel();
@@ -73,6 +73,7 @@ public class Sistema_CarolineGabrielMariana
                 case 6:
                     salvarDados();
                     break;
+
                 case 0:
                     salvarDados();
                     System.out.println("\nSaindo do sistema...");
@@ -165,28 +166,6 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n[CADASTRAR-IMOVEL-ERROR]: Houve algum problema ao cadastrar o imóvel.\n");
         
     }
-    
-    
-
-    private void listarImoveis() 
-    {
-        ArrayList<Imovel_CarolineGabrielMariana> imoveis = imobiliaria.getImoveis();
-        
-        if (imoveis.isEmpty()) 
-        {
-            System.out.println("\n[LISTAR-IMOVEIS]: Nao há imóveis cadastrados.");
-            return;
-        }   
-
-        System.out.println("\n\n--- Lista de Imóveis ---");
-        for (Imovel_CarolineGabrielMariana imovel : imoveis) 
-        {
-            System.out.println("\n" + imovel.toString() + '\n');
-        }
-
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
-    }
-
 
     private void removerImovel()
     {
@@ -419,4 +398,153 @@ public class Sistema_CarolineGabrielMariana
 
 
     }
+
+    private void opcoesDeListagem() 
+    {
+        System.out.println("Escolha a opção de listagem desejada:");
+        System.out.println("1. Listar todos os Imóveis cadastrados");
+        System.out.println("2. Listar todos os Imóveis de categoria Casa Residencial");
+        System.out.println("3. Listar todos os Imóveis de categoria Prédio Residencial");
+        System.out.println("4. Listar todos os Imóveis de categoria Comercial");
+        System.out.println("5. Listar todos os Imóveis disponíveis para locação");
+        System.out.println("6. Listar todos os Imóveis alugados");
+        System.out.println("7. Listar todos os Imóveis disponíveis para vendas");
+        System.out.println("8. Listar todos os Imóveis vendidos");
+        System.out.println("9. Listar todos os Imóveis com atraso no pagamento do aluguel");
+        System.out.println("10. Listar todos os Imóveis já alugados por um Cliente em específico");
+        System.out.println("11. Listar todos os Imóveis já comprados por um Cliente em específico");
+        System.out.println("12. Listar todos os Corretores cadastrados");
+        System.out.println("13. Listar todos os Clientes cadastrados");
+        System.out.println("14. Listar Clientes com aluguéis em atraso");
+        System.out.println("15. Listar todos os Aluguéis finalizados");
+        System.out.println("16. Listar todos os Aluguéis ainda dentro do prazo de locação");
+        System.out.println("17. Listar todas as Vendas realizadas");
+        System.out.println("18. Listar Vendas realizadas em um mês específico e total de lucro no mês");
+        System.out.println("19. Listar todos os tipos de Seguros cadastrados");
+
+        int opcao = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Digite a opção desejada: ");
+
+        switch (opcao) 
+        {
+            case 1:
+                listarImoveisCadastrados();
+                break;
+            case 2:
+                listarImoveisCasaResidencial();
+                break;
+            case 3:
+                listarImoveisPredioResidencial();
+                break;
+            case 4:
+                listarImoveisComercial();
+                break;
+            case 5:
+                listarImoveisDisponiveisParaLocacao();
+                break;
+            case 6:
+                listarImoveisAlugados();
+                break;
+            case 7:
+                listarImoveisDisponiveisParaVenda();
+                break;
+            case 8:
+                listarImoveisVendidos();
+                break;
+            case 9:
+                listarImoveisComAluguelEmAtraso();
+                break;
+            case 10:
+                listarImoveisAlugadosPorCliente();
+                break;
+            case 11:
+                listarImoveisCompradosPorCliente();
+                break;
+            case 12:
+                listarCorretoresCadastrados();
+                break;
+            case 13:
+                listarClientesCadastrados();
+                break;
+            case 14:
+                listarClientesComAluguelEmAtraso();
+                break;
+            case 15:
+                listarAlugueisFinalizados();
+                break;
+            case 16:
+                listarAlugueisDentroDoPrazo();
+                break;
+            case 17:
+                listarVendasRealizadas();
+                break;
+            case 18:
+                listarVendasPorMesComLucro();
+                break;
+            case 19:
+                listarSegurosCadastrados();
+                break;
+            default:
+                System.out.println("Opção inválida!");
+                break;
+        }
+    }
+
+    private void listarImoveisCadastrados() 
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveis = imobiliaria.getImoveis();
+        
+        if (imoveis.isEmpty()) 
+        {
+            System.out.println("\n[LISTAR-IMOVEIS]: Nao há imóveis cadastrados.");
+            return;
+        }   
+
+        System.out.println("\n\n--- Lista de Imóveis ---");
+        for (Imovel_CarolineGabrielMariana imovel : imoveis) 
+        {
+            System.out.println("\n" + imovel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+    private void listarImoveisCasaResidencial()
+    {
+        ArrayList<CasaResidencial_CarolineGabrielMariana> casasResidenciais = this.imobiliaria.getCasasResidenciais();
+
+        if (casasResidenciais == null)
+        {
+            System.out.println("\n[LISTAR-CASAS-RESIDENCIAS]: Não há casas residenciais cadastradas.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Casas Residenciais  ---");
+        for (CasaResidencial_CarolineGabrielMariana casaResidencial : casasResidenciais) 
+        {
+            System.out.println("\n" + casaResidencial.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+
+    }
+    private void listarImoveisPredioResidencial() {}
+    private void listarImoveisComercial() {}
+    private void listarImoveisDisponiveisParaLocacao() {}
+    private void listarImoveisAlugados() {}
+    private void listarImoveisDisponiveisParaVenda() {}
+    private void listarImoveisVendidos() {}
+    private void listarImoveisComAluguelEmAtraso() {}
+    private void listarImoveisAlugadosPorCliente() {}
+    private void listarImoveisCompradosPorCliente() {}
+    private void listarCorretoresCadastrados() {}
+    private void listarClientesCadastrados() {}
+    private void listarClientesComAluguelEmAtraso() {}
+    private void listarAlugueisFinalizados() {}
+    private void listarAlugueisDentroDoPrazo() {}
+    private void listarVendasRealizadas() {}
+    private void listarVendasPorMesComLucro() {}
+    private void listarSegurosCadastrados() {}
+
+
 }
