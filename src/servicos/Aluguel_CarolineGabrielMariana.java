@@ -1,5 +1,6 @@
 package servicos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import imoveis.Imovel_CarolineGabrielMariana;
 import transacoes.Pagamento_CarolineGabrielMariana;
 
 
-public class Aluguel_CarolineGabrielMariana 
+public class Aluguel_CarolineGabrielMariana implements Serializable
 {
 
     private int codigoAluguel;

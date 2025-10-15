@@ -1,6 +1,8 @@
 package servicos;
 
-public class Seguro_CarolineGabrielMariana
+import java.io.Serializable;
+
+public class Seguro_CarolineGabrielMariana implements Serializable
 {
     private int codigoSeguro;
     private String nomeSeguradora;

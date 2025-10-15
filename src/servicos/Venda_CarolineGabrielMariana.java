@@ -1,5 +1,6 @@
 package servicos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import usuarios.Cliente_CarolineGabrielMariana;
@@ -9,7 +10,7 @@ import transacoes.Cartao_CarolineGabrielMariana;
 import imoveis.Imovel_CarolineGabrielMariana;
 
 
-public class Venda_CarolineGabrielMariana 
+public class Venda_CarolineGabrielMariana implements Serializable
 {
     private int codigoVenda;
     private Cliente_CarolineGabrielMariana cliente;
