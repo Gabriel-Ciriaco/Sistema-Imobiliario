@@ -227,4 +227,70 @@ public class Imobiliaria_CarolineGabrielMariana
         return this.imoveis.remove(imovel);
     }
     
+    public Cliente_CarolineGabrielMariana getCliente(int codigoUsuario)
+    {
+        for (Cliente_CarolineGabrielMariana cliente : clientes)
+        {
+            if (codigoUsuario == cliente.getCodigoUsuario())
+                return cliente;
+        }
+
+        return null;
+    }
+
+    public Corretor_CarolineGabrielMariana getCorretor(int codigoUsuario)
+    {
+        for (Corretor_CarolineGabrielMariana corretor : corretores)
+        {
+            if (codigoUsuario == corretor.getCodigoUsuario())
+                return corretor;
+        }
+
+        return null;
+    }
+
+    public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueisClientes(int codigoUsuario)
+    {
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueisCliente = new ArrayList<Aluguel_CarolineGabrielMariana>();
+
+        for (Aluguel_CarolineGabrielMariana aluguel : this.alugueis)
+        {
+            if (aluguel.getCliente().getCodigoUsuario() == codigoUsuario)
+            {
+                alugueisCliente.add(aluguel);
+            }
+        }
+
+        return !alugueisCliente.isEmpty() ? alugueisCliente : null;
+    }
+
+    public ArrayList<Venda_CarolineGabrielMariana> getComprasClientes(int codigoUsuario)
+    {
+        ArrayList<Venda_CarolineGabrielMariana> comprasCliente = new ArrayList<Venda_CarolineGabrielMariana>();
+
+        for (Venda_CarolineGabrielMariana venda : this.vendas)
+        {
+            if (venda.getCliente().getCodigoUsuario() == codigoUsuario)
+            {
+                comprasCliente.add(venda);
+            }
+        }
+
+        return !comprasCliente.isEmpty() ? comprasCliente : null;
+    }
+
+    public ArrayList<Imovel_CarolineGabrielMariana> getImoveisCliente(int codigoUsuario)
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveisCliente = new ArrayList<Imovel_CarolineGabrielMariana>();
+
+        for (Venda_CarolineGabrielMariana venda : vendas)
+        {
+            if (venda.getCliente().getCodigoUsuario() == codigoUsuario)
+                imoveisCliente.add(venda.getImovel());
+        }
+
+        return !imoveisCliente.isEmpty() ? imoveisCliente : null;
+    }
+
+    
 }
