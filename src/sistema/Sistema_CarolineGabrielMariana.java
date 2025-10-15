@@ -4,6 +4,7 @@ import configuracoes.Serializador_CarolineGabrielMariana;
 
 import imobiliaria.Imobiliaria_CarolineGabrielMariana;
 import imoveis.*;
+import servicos.Seguro_CarolineGabrielMariana;
 import usuarios.Cliente_CarolineGabrielMariana;
 import usuarios.Corretor_CarolineGabrielMariana;
 import usuarios.Usuario_CarolineGabrielMariana;
@@ -286,5 +287,33 @@ public class Sistema_CarolineGabrielMariana
         
         this.imobiliaria.getClientes().add(novoCliente);
         
+    }
+
+    private Seguro_CarolineGabrielMariana adicionarSeguro()
+    {
+        int codigoSeguro = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Seguro: ");
+        
+        Seguro_CarolineGabrielMariana seguro_roubo = new Seguro_CarolineGabrielMariana(codigoSeguro, "Porto Seguro", 
+                                                    "Roubo", "Cobertura total contra roubo", 5000.0f);
+       
+        Seguro_CarolineGabrielMariana seguro_desastresNaturais = new Seguro_CarolineGabrielMariana(codigoSeguro, "Porto Seguro",
+                                                                "Desastres Naturais", "Cobertura contra enchentes, terremotos e deslizamentos", 
+                                                                7500.0f);
+
+        Seguro_CarolineGabrielMariana seguro_incendio = new Seguro_CarolineGabrielMariana(codigoSeguro, "Porto Seguro",
+                                                                "Incêndio", "Cobertura contra incêndios residenciais e comerciais", 
+                                                                6200.0f);
+                                
+        Seguro_CarolineGabrielMariana seguro_completo = new Seguro_CarolineGabrielMariana(codigoSeguro, "Porto Seguro",
+                                                        "Completo", "Cobertura total: roubo, incêndio, enchente, colisões e desastres naturais", 
+                                                        12000.0f);
+
+        return null;
+        
+    }
+
+    private void alugarImoveis()
+    {
+
     }
 }
