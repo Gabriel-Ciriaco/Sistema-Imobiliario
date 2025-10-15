@@ -5,6 +5,8 @@ import configuracoes.Serializador_CarolineGabrielMariana;
 import imobiliaria.Imobiliaria_CarolineGabrielMariana;
 import imoveis.*;
 import servicos.Seguro_CarolineGabrielMariana;
+import transacoes.Cartao_CarolineGabrielMariana;
+import transacoes.Pagamento_CarolineGabrielMariana;
 import usuarios.Cliente_CarolineGabrielMariana;
 import usuarios.Corretor_CarolineGabrielMariana;
 import usuarios.Usuario_CarolineGabrielMariana;
@@ -312,8 +314,111 @@ public class Sistema_CarolineGabrielMariana
         
     }
 
+    private Cartao_CarolineGabrielMariana cadastrarCartaoCliente()
+    {
+        String nome = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                                                              "Nome no cartão: ",
+                                                         true
+                                                                      );
+
+        String bandeira = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                                                                      "Bandeira do cartão: ",
+                                                                 true
+                                                                              );
+
+        String numero = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                                                                              "Número do cartão: ",
+                                                                         false
+                                                                                      );
+
+        Cartao_CarolineGabrielMariana cartao = new Cartao_CarolineGabrielMariana(nome, bandeira, numero);
+
+        return cartao;
+    }
+
     private void alugarImoveis()
     {
+        int codigoUsuarioCorretor = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do corretor: ");
+
+        Corretor_CarolineGabrielMariana corretor = this.imobiliaria.getCorretor(codigoUsuarioCorretor);
+
+        while(corretor == null)
+        {
+            System.out.println("\n[ALUGAR-ERROR]: Corretor não entrado. Por favor, tente novamente.");
+            
+            codigoUsuarioCorretor = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do corretor: ");
+
+            corretor = this.imobiliaria.getCorretor(codigoUsuarioCorretor);
+        }
+
+        int codigoUsuarioCliente = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do cliente: ");
+
+        Cliente_CarolineGabrielMariana cliente = this.imobiliaria.getCliente(codigoUsuarioCliente);
+
+        while(cliente == null)
+        {
+            System.out.println("\n[ALUGAR-ERROR]: Cliente não entrado. Por favor, tente novamente.");
+            
+            codigoUsuarioCliente = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do cliente: ");
+
+            cliente = this.imobiliaria.getCliente(codigoUsuarioCliente);
+
+        }
+        
+        int codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Imóvel: ");
+
+        Imovel_CarolineGabrielMariana imovel = this.imobiliaria.getImovel(codigoImovel);
+
+        while(imovel== null)
+        {
+            System.out.println("\n[ALUGAR-ERROR]: Imóvel não entrado. Por favor, tente novamente.");
+            
+            codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Imóvel: ");
+
+            imovel = this.imobiliaria.getImovel(codigoImovel);
+
+        }
+
+        int codigoAluguel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de Aluguel: ");
+
+        LocalDate dataAluguel= Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
+        "Data de Aluguel (Formato: YYYY-MM-DD): ");
+
+        LocalDate dataDevolucao = Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
+        "Data de Devolução (Formato: YYYY-MM-DD): ");
+
+        LocalDate dataPagamentoMensal = Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
+        "Data de Pagamento Mensal (Formato: YYYY-MM-DD): ");
+
+        float valorTotalAluguel = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor Total do Aluguel: ");
+
+        int formaPagamento = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Digite a forma de Pagamento (1-Cartão e 2-Dinheiro): ");
+
+        while (formaPagamento != 1 || formaPagamento != 2) 
+        {
+
+            //TO-DO: Finalizar.
+            
+        }
+        switch (formaPagamento)
+        {
+            
+            case 1:
+
+                Cartao_CarolineGabrielMariana cartao = cadastrarCartaoCliente();
+                break;
+
+            case 2:
+
+            String tipoMoeda = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                    "Tipo da moeda: ",
+                    true
+                    );
+            break;
+        }
+
+
+
 
     }
 }
