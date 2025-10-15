@@ -14,6 +14,18 @@ public class Cliente_CarolineGabrielMariana extends Usuario_CarolineGabrielMaria
         this.dataCadastro = null;
     }
 
+
+    
+    public Cliente_CarolineGabrielMariana(Usuario_CarolineGabrielMariana usuario, LocalDate dataCadastro) 
+    {
+        super(usuario.getCodigoUsuario(), usuario.getNome(), usuario.getCpf(), 
+            usuario.getRg(), usuario.getDataNascimento(), usuario.getEndereco(), 
+            usuario.getCep(), usuario.getTelefone(), usuario.getEmail());
+        this.dataCadastro = dataCadastro;
+    }
+
+
+
     public Cliente_CarolineGabrielMariana(
             int codigoUsuario, String nome, String cpf, String rg, LocalDate dataNascimento, String endereco,
             String cep, String telefone, String email, LocalDate dataCadastro

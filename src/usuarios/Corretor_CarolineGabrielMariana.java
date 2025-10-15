@@ -27,6 +27,23 @@ public class Corretor_CarolineGabrielMariana extends Usuario_CarolineGabrielMari
         this.dataAdmissao = null;
     }
 
+
+    
+    public Corretor_CarolineGabrielMariana(
+        Usuario_CarolineGabrielMariana usuario,
+        String creci, float salario, String pis, LocalDate dataAdmissao)
+    {
+        super(usuario.getCodigoUsuario(), usuario.getNome(), usuario.getCpf(), 
+            usuario.getRg(), usuario.getDataNascimento(), usuario.getEndereco(), 
+            usuario.getCep(), usuario.getTelefone(), usuario.getEmail());
+        this.creci = creci;
+        this.salario = salario;
+        this.pis = pis;
+        this.dataAdmissao = dataAdmissao;
+    }
+
+
+
     public Corretor_CarolineGabrielMariana(
                 int codigoUsuario, String nome, String cpf, String rg, LocalDate dataNascimento, String endereco,
                 String cep, String telefone, String email, String creci, float salario, String pis,

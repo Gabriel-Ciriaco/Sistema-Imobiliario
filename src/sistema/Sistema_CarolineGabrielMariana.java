@@ -4,6 +4,8 @@ import configuracoes.Serializador_CarolineGabrielMariana;
 
 import imobiliaria.Imobiliaria_CarolineGabrielMariana;
 import imoveis.*;
+import usuarios.Cliente_CarolineGabrielMariana;
+import usuarios.Corretor_CarolineGabrielMariana;
 import usuarios.Usuario_CarolineGabrielMariana;
 
 import java.time.LocalDate;
@@ -32,10 +34,12 @@ public class Sistema_CarolineGabrielMariana
         do 
         {
             System.out.println("\n--- Sistema Imobiliaria ---");
-            System.out.println("1. Cadastrar Imóvel");
-            System.out.println("2. Listar Imoveis");
-            System.out.println("3. Remover Imóvel");
-            System.out.println("4. Salvar Dados");
+            System.out.println("1. Cadastrar Corretor");
+            System.out.println("2. Cadastrar Cliente");
+            System.out.println("3. Cadastrar Imóvel");
+            System.out.println("4. Listar Imoveis");
+            System.out.println("5. Remover Imóvel");
+            System.out.println("6. Salvar Dados");
             System.out.println("0. Sair");
             
             opcao = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Escolha uma opção: ");
@@ -44,16 +48,24 @@ public class Sistema_CarolineGabrielMariana
             switch (opcao) 
             {
                 case 1:
-                    cadastrarImovel();
+                    cadastrarCorretor();
                     salvarDados();
                     break;
                 case 2:
-                    listarImoveis();
+                    cadastrarCliente();
+                    salvarDados();
                     break;
                 case 3:
-                    removerImovel();
+                    cadastrarImovel();
+                    salvarDados();
                     break;
                 case 4:
+                    listarImoveis();
+                    break;
+                case 5:
+                    removerImovel();
+                    break;
+                case 6:
                     salvarDados();
                     break;
                 case 0:
@@ -221,7 +233,7 @@ public class Sistema_CarolineGabrielMariana
 
     private Usuario_CarolineGabrielMariana cadastrarUsuario()
     {
-        int codigoUsuario = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Nome do Usuário: ");
+        int codigoUsuario = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Usuário: ");
         
         String nome = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Nome do Usuário: ", true);
 
@@ -234,7 +246,7 @@ public class Sistema_CarolineGabrielMariana
 
         String endereco = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Endereço: ", true);
         
-        String cep = Input_Utils_CarolineGabrielMariana.lerString(scanner, "CEP: ", true);
+        String cep = Input_Utils_CarolineGabrielMariana.lerString(scanner, "CEP: ", false);
         
         String telefone = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Telefone: ", false);
 
@@ -244,4 +256,35 @@ public class Sistema_CarolineGabrielMariana
             codigoUsuario, nome, cpf, rg, dataNascimento, endereco, cep, telefone, email);
     }
 
+        private void cadastrarCorretor()
+    {
+        String creci = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                                                              "Creci do corretor: ",
+                                                         false
+                                                                      );
+
+        float salario = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Salário do corretor: ");
+
+        String pis = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                                                              "Pis do corretor: ",
+                                                         false
+                                                                      );
+        LocalDate dataAdmissao = Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
+                                                "Data de Admissão (Formato: YYYY-MM-DD): ");
+        
+        Corretor_CarolineGabrielMariana novoCorretor = new Corretor_CarolineGabrielMariana(
+            this.cadastrarUsuario(), creci, salario, pis, dataAdmissao);
+
+        this.imobiliaria.getCorretores().add(novoCorretor);
+        
+    }
+
+    private void cadastrarCliente()
+    {
+        Cliente_CarolineGabrielMariana novoCliente = new Cliente_CarolineGabrielMariana(
+            this.cadastrarUsuario(), LocalDate.now());
+        
+        this.imobiliaria.getClientes().add(novoCliente);
+        
+    }
 }
