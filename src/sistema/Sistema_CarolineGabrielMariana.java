@@ -1,6 +1,5 @@
 package sistema;
 
-import configuracoes.Desserializador_CarolineGabrielMariana;
 import configuracoes.Serializador_CarolineGabrielMariana;
 
 import imobiliaria.Imobiliaria_CarolineGabrielMariana;
@@ -17,6 +16,7 @@ import usuarios.Usuario_CarolineGabrielMariana;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -123,6 +123,13 @@ public class Sistema_CarolineGabrielMariana
                                                             );
                                                            
         int codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner,"Código do Imóvel: ");
+        
+        while (this.imobiliaria.getImovel(codigoImovel) != null)
+        {
+            System.err.println("[CADASTRAR-IMOVEL]: Por favor, digite outro código.");
+            
+            codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner,"Código do Imóvel: ");
+        }
  
         String endereco = Input_Utils_CarolineGabrielMariana.lerString(scanner,
                                                               "Endereço do Imóvel: ",
@@ -259,6 +266,14 @@ public class Sistema_CarolineGabrielMariana
     {
         int codigoUsuario = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Usuário: ");
         
+        // O código não pode ser de um cliente ou de um corretor.
+        while (this.imobiliaria.getCliente(codigoUsuario) != null ||
+        this.imobiliaria.getCorretor(codigoUsuario) != null)
+        {
+            System.err.println("[CADASTRAR-USUÁRIO]: Por favor, digite outro código de usuário.");
+            codigoUsuario = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Usuário: ");
+        }
+        
         String nome = Input_Utils_CarolineGabrielMariana.lerString(scanner, "Nome do Usuário: ", true);
 
         String cpf = Input_Utils_CarolineGabrielMariana.lerString(scanner, "CPF: ", false);
@@ -324,24 +339,32 @@ public class Sistema_CarolineGabrielMariana
 
         System.out.println("4. Cobertura total: roubo, incêndio, enchente, colisões e desastres naturais");
 
-        System.out.println("5. Nenhum.");
+        System.out.println("5. Nenhum (ou sair).");
 
         int codigoSeguro = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Seguro: ");
         
         ArrayList<Seguro_CarolineGabrielMariana> seguros = new ArrayList<Seguro_CarolineGabrielMariana>();
 
+        HashMap<Integer, Boolean> segurosJaAdicionados = new HashMap<Integer, Boolean>();
+
         while (codigoSeguro != 5)
         {
             Seguro_CarolineGabrielMariana seguroSelecionado = imobiliaria.getSeguro(codigoSeguro);
 
-            if (seguroSelecionado != null)
+            if (!segurosJaAdicionados.containsKey(codigoSeguro) && seguroSelecionado != null)
             {
                 seguros.add(seguroSelecionado);
+            
+                segurosJaAdicionados.put(codigoSeguro, true);
+            
+                System.out.println("\n[SEGURO-SELECIONAR]: Novo seguro Adicionado: " + seguroSelecionado.getDescricao() + "\n");
             }
             else
             {
-                System.out.println("Seguro não selecionado.");
+                System.out.println("\n[SEGURO-SELECIONAR]: Seguro não selecionado.\n");
             }
+
+            codigoSeguro = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Outro código de Seguro: ");
         }
         
         return seguros;       
@@ -413,6 +436,13 @@ public class Sistema_CarolineGabrielMariana
         }
 
         int codigoAluguel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de Aluguel: ");
+        
+        while (this.imobiliaria.getAluguel(codigoAluguel) != null)
+        {
+            System.err.println("[ALUGUEL-USUÁRIO]: Por favor, digite outro código de aluguel.");
+            
+            codigoAluguel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de Aluguel: ");
+        }
 
         LocalDate dataAluguel= Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
         "Data de Aluguel (Formato: YYYY-MM-DD): ");
@@ -513,6 +543,13 @@ public class Sistema_CarolineGabrielMariana
 
         int codigoVenda = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código da Venda: ");
 
+        while (this.imobiliaria.getVenda(codigoVenda) != null)
+        {
+            System.err.println("[VENDER-IMÓVEL]: Por favor, digite outro código de venda.");
+            
+            codigoVenda = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de Venda: ");
+        }
+
         Venda_CarolineGabrielMariana venda = new Venda_CarolineGabrielMariana(
             codigoVenda, cliente, corretor, imovel, LocalDate.now(), this.cadastrarCartaoCliente(), false);
 
@@ -555,7 +592,7 @@ public class Sistema_CarolineGabrielMariana
 
             for (Aluguel_CarolineGabrielMariana aluguel : alugueisCliente)
             {
-                System.out.println("Aluguel: " + i + ": " + aluguel.toString() + "\n");
+                System.out.println("\nAluguel: " + i + ": " + aluguel.toString() + "\n");
                 i++;
             }
 
@@ -1087,12 +1124,16 @@ public class Sistema_CarolineGabrielMariana
 
         System.out.println("\n\n--- Lista de Imóveis Vendidos no Mês ---");
 
+        float lucroMensal = 0.0f;
+
         for (Venda_CarolineGabrielMariana venda : vendas) 
         {
             System.out.println("\n" + venda.toString() + '\n');
+
+            lucroMensal += venda.getValorTotalVenda();
         }
 
-        
+        System.out.printf("Lucro do Mês (%d): R$ %.2f", mes, lucroMensal);
     }
 
     private void listarSegurosCadastrados()
