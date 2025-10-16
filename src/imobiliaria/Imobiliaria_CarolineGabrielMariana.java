@@ -172,6 +172,16 @@ public class Imobiliaria_CarolineGabrielMariana
         this.imoveis = imoveis;
     }
 
+    public Seguro_CarolineGabrielMariana getSeguro(int codigoSeguro)
+    {
+        for (Seguro_CarolineGabrielMariana seguro : seguros)
+        {
+            if (seguro.getCodigoSeguro() == codigoSeguro)
+                return seguro;
+        }
+
+        return null;
+    }
 
     public ArrayList<Cliente_CarolineGabrielMariana> getClientes() {
         return clientes;
@@ -235,7 +245,7 @@ public class Imobiliaria_CarolineGabrielMariana
                 casasResidenciais.add((CasaResidencial_CarolineGabrielMariana) imovel);
         }
 
-        return !casasResidenciais.isEmpty() ? casasResidenciais : null;
+        return casasResidenciais;
     }
 
     public ArrayList<PredioResidencial_CarolineGabrielMariana> getPredioResidenciais()
@@ -248,7 +258,7 @@ public class Imobiliaria_CarolineGabrielMariana
                 prediosResidenciais.add((PredioResidencial_CarolineGabrielMariana) imovel);
         }
 
-        return !prediosResidenciais.isEmpty() ? prediosResidenciais : null;
+        return prediosResidenciais;
     }
 
     public ArrayList<Comercial_CarolineGabrielMariana> getComerciais()
@@ -261,7 +271,7 @@ public class Imobiliaria_CarolineGabrielMariana
                 comerciais.add((Comercial_CarolineGabrielMariana) imovel);
         }
 
-        return !comerciais.isEmpty() ? comerciais : null;
+        return comerciais;
     }
 
     public ArrayList<Imovel_CarolineGabrielMariana> getImoveisDisponiveisLocacao()
@@ -278,7 +288,7 @@ public class Imobiliaria_CarolineGabrielMariana
             imoveisDisponiveisLocacao.remove(venda.getImovel());
         }
 
-        return !imoveisDisponiveisLocacao.isEmpty() ? imoveisDisponiveisLocacao : null;
+        return imoveisDisponiveisLocacao;
     }
 
     public ArrayList<Imovel_CarolineGabrielMariana> getImoveisAlugados()
@@ -290,7 +300,7 @@ public class Imobiliaria_CarolineGabrielMariana
             imoveisAlugados.add(aluguel.getImovel());
         }
 
-        return !imoveisAlugados.isEmpty() ? imoveisAlugados : null;
+        return imoveisAlugados;
     }
 
     public ArrayList<Imovel_CarolineGabrielMariana> getImoveisDisponiveisVenda()
@@ -307,7 +317,7 @@ public class Imobiliaria_CarolineGabrielMariana
             imoveisDisponiveisVenda.remove(venda.getImovel());
         }
 
-        return !imoveisDisponiveisVenda.isEmpty() ? imoveisDisponiveisVenda : null;
+        return imoveisDisponiveisVenda;
     }
 
     public ArrayList<Imovel_CarolineGabrielMariana> getImoveisVendidos()
@@ -319,7 +329,7 @@ public class Imobiliaria_CarolineGabrielMariana
             imoveisVendidos.add(venda.getImovel());
         }
 
-        return !imoveisVendidos.isEmpty() ? imoveisVendidos : null;
+        return imoveisVendidos;
     }
 
     public boolean removerImovel(Imovel_CarolineGabrielMariana imovel)
@@ -361,7 +371,7 @@ public class Imobiliaria_CarolineGabrielMariana
             }
         }
 
-        return !alugueisCliente.isEmpty() ? alugueisCliente : null;
+        return alugueisCliente;
     }
 
     public ArrayList<Venda_CarolineGabrielMariana> getComprasClientes(int codigoUsuario)
@@ -376,7 +386,7 @@ public class Imobiliaria_CarolineGabrielMariana
             }
         }
 
-        return !comprasCliente.isEmpty() ? comprasCliente : null;
+        return comprasCliente;
     }
 
     public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueisAtrasados()
@@ -393,7 +403,7 @@ public class Imobiliaria_CarolineGabrielMariana
                 }
         }
 
-        return !alugueisAtrasados.isEmpty() ? alugueisAtrasados : null;
+        return alugueisAtrasados;
     }
 
     public ArrayList<Cliente_CarolineGabrielMariana> getClientesAlugueisAtrasados()
@@ -405,7 +415,7 @@ public class Imobiliaria_CarolineGabrielMariana
             clientesAlugueisAtrasados.add(aluguel.getCliente());
         }
 
-        return !clientesAlugueisAtrasados.isEmpty() ? clientesAlugueisAtrasados : null;
+        return clientesAlugueisAtrasados;
     }
 
     public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueisFinalizados()
@@ -418,7 +428,7 @@ public class Imobiliaria_CarolineGabrielMariana
                 alugueisFinalizados.add(aluguel);
         }
 
-        return !alugueisFinalizados.isEmpty() ? alugueisFinalizados : null;
+        return alugueisFinalizados;
     }
 
     public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueisPrazoLocacao()
@@ -431,7 +441,7 @@ public class Imobiliaria_CarolineGabrielMariana
                 alugueisPrazoLocacao.add(aluguel);
         }
 
-        return !alugueisPrazoLocacao.isEmpty() ? alugueisPrazoLocacao : null;
+        return alugueisPrazoLocacao;
     }
 
     public ArrayList<Venda_CarolineGabrielMariana> getVendasMes(int mes)
@@ -444,7 +454,7 @@ public class Imobiliaria_CarolineGabrielMariana
                 vendasMes.add(venda);
         }
 
-        return !vendasMes.isEmpty() ? vendasMes : null;
+        return vendasMes;
     }
 
 
