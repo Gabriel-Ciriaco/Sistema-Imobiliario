@@ -402,6 +402,24 @@ public class Imobiliaria_CarolineGabrielMariana
         return alugueisAtrasados;
     }
 
+    public ArrayList<Aluguel_CarolineGabrielMariana> getAlugueisAtrasadosCliente(int codigoUsuario)
+    {
+        Cliente_CarolineGabrielMariana cliente = this.getCliente(codigoUsuario);
+        
+        if (cliente == null)
+            return null;
+        
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueisAtrasados = new ArrayList<Aluguel_CarolineGabrielMariana>();
+        
+        for (Aluguel_CarolineGabrielMariana aluguel : this.getAlugueisAtrasados())
+        {
+            if (aluguel.getCliente().getCodigoUsuario() == codigoUsuario)
+                alugueisAtrasados.add(aluguel);
+        }
+
+        return alugueisAtrasados;
+    }
+
     public ArrayList<Cliente_CarolineGabrielMariana> getClientesAlugueisAtrasados()
     {
         ArrayList<Cliente_CarolineGabrielMariana> clientesAlugueisAtrasados = new ArrayList<Cliente_CarolineGabrielMariana>();
@@ -431,7 +449,7 @@ public class Imobiliaria_CarolineGabrielMariana
     {
         ArrayList<Aluguel_CarolineGabrielMariana> alugueisPrazoLocacao = new ArrayList<Aluguel_CarolineGabrielMariana>();
         
-        for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueisPrazoLocacao)
         {
             if (!aluguel.verificarAtraso())
                 alugueisPrazoLocacao.add(aluguel);

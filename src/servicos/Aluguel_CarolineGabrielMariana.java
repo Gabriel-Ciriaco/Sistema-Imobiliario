@@ -233,7 +233,8 @@ public class Aluguel_CarolineGabrielMariana implements Serializable
 
         if (!finalizado &&
             !pago &&
-            diaHoje.isAfter(this.getDataPagamentoMensal())
+            diaHoje.isAfter(this.getDataPagamentoMensal()) ||
+            !pago
            )
         {
             return true;

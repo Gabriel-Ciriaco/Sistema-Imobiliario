@@ -1,6 +1,8 @@
 package transacoes;
 
-public abstract class Pagamento_CarolineGabrielMariana 
+import java.io.Serializable;
+
+public abstract class Pagamento_CarolineGabrielMariana implements Serializable
 {
 
     private String tipoPagamento;

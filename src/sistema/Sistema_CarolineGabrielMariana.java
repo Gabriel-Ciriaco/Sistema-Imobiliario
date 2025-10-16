@@ -1,5 +1,6 @@
 package sistema;
 
+import configuracoes.Desserializador_CarolineGabrielMariana;
 import configuracoes.Serializador_CarolineGabrielMariana;
 
 import imobiliaria.Imobiliaria_CarolineGabrielMariana;
@@ -45,9 +46,12 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("3. Cadastrar Imóvel");
             System.out.println("4. Alugar Imóvel");
             System.out.println("5. Vender Imóvel");
-            System.out.println("6. Opções de Listagens");
-            System.out.println("7. Remover Imóvel");
-            System.out.println("8. Salvar Dados");
+            System.out.println("6. Pagar Aluguel");
+            System.out.println("7. Finalizar Aluguel");
+            System.out.println("8. Pagar Venda");
+            System.out.println("9. Opções de Listagens");
+            System.out.println("10. Remover Imóvel");
+            System.out.println("11. Salvar Dados");
             System.out.println("0. Sair");
             
             opcao = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Escolha uma opção: ");
@@ -69,17 +73,23 @@ public class Sistema_CarolineGabrielMariana
                     break;
                 case 4:
                     alugarImoveis();
+                    salvarDados();
                     break;
                 case 5:
-                    //venderImovel();
+                    venderImovel();
+                    salvarDados();
                     break;
                 case 6:
+                    pagarAluguel();
+                    salvarDados();
+                    break;
+                case 9:
                     opcoesDeListagem();
                     break;
-                case 7:
+                case 10:
                     removerImovel();
                     break;
-                case 8:
+                case 11:
                     salvarDados();
                     break;
 
@@ -90,6 +100,8 @@ public class Sistema_CarolineGabrielMariana
                 default:
                     System.out.println("\n[SISTEMA-ERROR]: Opção inválida!");
             }
+
+            Input_Utils_CarolineGabrielMariana.lerString(scanner, "\nPressione qualquer botão para continuar... ", false);
         } while (opcao != 0);
     }
 
@@ -220,7 +232,18 @@ public class Sistema_CarolineGabrielMariana
 
     private void salvarDados() 
     {
+        Serializador_CarolineGabrielMariana.salvarObjeto(imobiliaria.getAlugueis(), imobiliaria.getConfiguracoes().getArquivoAlugueis());
+
+        Serializador_CarolineGabrielMariana.salvarObjeto(imobiliaria.getVendas(), imobiliaria.getConfiguracoes().getArquivoVendas());
+
         Serializador_CarolineGabrielMariana.salvarObjeto(imobiliaria.getImoveis(), imobiliaria.getConfiguracoes().getArquivoImoveis());
+        
+        Serializador_CarolineGabrielMariana.salvarObjeto(imobiliaria.getClientes(), imobiliaria.getConfiguracoes().getArquivoClientes());
+        
+        Serializador_CarolineGabrielMariana.salvarObjeto(imobiliaria.getCorretores(), imobiliaria.getConfiguracoes().getArquivoCorretores());
+
+        Serializador_CarolineGabrielMariana.salvarObjeto(imobiliaria.getSeguros(), imobiliaria.getConfiguracoes().getArquivoSeguros());
+        
         System.out.println("\nDados salvos com sucesso!");
     }
 
@@ -249,7 +272,7 @@ public class Sistema_CarolineGabrielMariana
             codigoUsuario, nome, cpf, rg, dataNascimento, endereco, cep, telefone, email);
     }
 
-        private void cadastrarCorretor()
+    private void cadastrarCorretor()
     {
         String creci = Input_Utils_CarolineGabrielMariana.lerString(scanner,
                                                               "Creci do corretor: ",
@@ -398,7 +421,7 @@ public class Sistema_CarolineGabrielMariana
 
         Pagamento_CarolineGabrielMariana formaPagamento = null;
 
-        while (selecionarFormaPagamento != 1 || selecionarFormaPagamento != 2) 
+        while (selecionarFormaPagamento != 1 && selecionarFormaPagamento != 2) 
         {
             System.out.println("[ALUGAR-ERROR]: Por favor, digite um valor válido (1 ou 2).");
 
@@ -435,6 +458,117 @@ public class Sistema_CarolineGabrielMariana
             this.imobiliaria.getAlugueis().add(novoAluguel);
         else
             System.err.println("\n[ALUGAR-IMOVEIS]: Ocorreu um erro interno ao alugar o imóvel.");
+    }
+
+    private void venderImovel()
+    {
+        int codigoUsuarioCorretor = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do corretor: ");
+
+        Corretor_CarolineGabrielMariana corretor = this.imobiliaria.getCorretor(codigoUsuarioCorretor);
+
+        while(corretor == null)
+        {
+            System.out.println("\n[VENDER-ERROR]: Corretor não encontrado. Por favor, tente novamente.");
+            
+            codigoUsuarioCorretor = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do corretor: ");
+
+            corretor = this.imobiliaria.getCorretor(codigoUsuarioCorretor);
+        }
+
+        int codigoUsuarioCliente = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do cliente: ");
+
+        Cliente_CarolineGabrielMariana cliente = this.imobiliaria.getCliente(codigoUsuarioCliente);
+
+        while(cliente == null)
+        {
+            System.out.println("\n[VENDER-ERROR]: Cliente não encontrado. Por favor, tente novamente.");
+            
+            codigoUsuarioCliente = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do cliente: ");
+
+            cliente = this.imobiliaria.getCliente(codigoUsuarioCliente);
+
+        }
+        
+        int codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Imóvel: ");
+
+        Imovel_CarolineGabrielMariana imovel = this.imobiliaria.getImovel(codigoImovel);
+
+        while(imovel== null)
+        {
+            System.out.println("\n[ALUGAR-ERROR]: Imóvel não encontrado. Por favor, tente novamente.");
+            
+            codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Imóvel: ");
+
+            imovel = this.imobiliaria.getImovel(codigoImovel);
+
+        }
+
+        int codigoVenda = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código da Venda: ");
+
+        Venda_CarolineGabrielMariana venda = new Venda_CarolineGabrielMariana(
+            codigoVenda, cliente, corretor, imovel, LocalDate.now(), this.cadastrarCartaoCliente(), false);
+
+        if (this.imobiliaria.getVendas() != null)
+            this.imobiliaria.getVendas().add(venda);
+        else
+            System.err.println("[VENDER-ERROR]: Houve um erro interno ao gerar a venda do imóvel.");
+    }
+
+    private void pagarAluguel()
+    {
+        int codigoUsuarioCliente = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do cliente: ");
+
+        Cliente_CarolineGabrielMariana cliente = this.imobiliaria.getCliente(codigoUsuarioCliente);
+
+        while(cliente == null)
+        {
+            System.out.println("\n[VENDER-ERROR]: Cliente não encontrado. Por favor, tente novamente.");
+            
+            codigoUsuarioCliente = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do cliente: ");
+
+            cliente = this.imobiliaria.getCliente(codigoUsuarioCliente);
+        }
+
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueisCliente = this.imobiliaria.getAlugueisAtrasadosCliente(codigoUsuarioCliente);
+
+        if (alugueisCliente == null)
+        {
+            System.err.println("\n[ALUGUEL]: O cliente não foi encontrado\n");
+        }
+        else if (alugueisCliente.isEmpty())
+        {
+            System.err.println("\n[ALUGUEL]: Não há alugueis atrasados desse cliente.\n");
+        }
+        else
+        {
+            System.out.println("Selecione um aluguel para pagar: ");
+            
+            int i = 1;
+
+            for (Aluguel_CarolineGabrielMariana aluguel : alugueisCliente)
+            {
+                System.out.println("Aluguel: " + i + ": " + aluguel.toString() + "\n");
+                i++;
+            }
+
+            int opcaoAluguel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Número do Aluguel: ");
+            
+            while (opcaoAluguel < 1 && opcaoAluguel > alugueisCliente.size())
+            {
+                System.err.println("[PAGAR-ALUGUEL-ERROR]: Selecione um aluguel válido.");
+
+                opcaoAluguel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Número do Aluguel: ");
+            }
+
+            Aluguel_CarolineGabrielMariana aluguelPagar = alugueisCliente.get(opcaoAluguel - 1);
+
+            aluguelPagar.setPago(true);
+
+            System.out.println("\nAluguel pago com sucesso!\n");
+
+        }
+
+        
     }
 
     private void opcoesDeListagem() 
@@ -543,7 +677,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + imovel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
     private void listarImoveisCasaResidencial()
@@ -563,7 +697,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + casaResidencial.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
 
     }
     private void listarImoveisPredioResidencial()
@@ -584,7 +718,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + predioResidencial.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -606,7 +740,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + comercial.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
 
     }
 
@@ -628,7 +762,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + imovel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
     
@@ -649,7 +783,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + imovel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -671,7 +805,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + imovel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -693,7 +827,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + imovel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -715,7 +849,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + aluguel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -739,7 +873,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + aluguel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
 
     }
 
@@ -763,7 +897,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + venda.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -785,7 +919,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + corretor.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -807,7 +941,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + cliente.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
     private void listarClientesComAluguelEmAtraso() 
@@ -828,7 +962,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + cliente.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
     private void listarAlugueisFinalizados()
@@ -849,7 +983,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + aluguel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
     private void listarAlugueisDentroDoPrazo()
@@ -870,7 +1004,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + aluguel.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -892,7 +1026,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + venda.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
@@ -916,7 +1050,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + venda.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
     private void listarSegurosCadastrados()
@@ -937,7 +1071,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("\n" + seguro.toString() + '\n');
         }
 
-        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+        
     }
 
 
