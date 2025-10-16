@@ -471,5 +471,25 @@ public class Imobiliaria_CarolineGabrielMariana
         return vendasMes;
     }
 
+    public Venda_CarolineGabrielMariana getVenda(int codigoVenda)
+    {
+        for (Venda_CarolineGabrielMariana venda : vendas)
+        {
+            if (venda.getCodigoVenda() == codigoVenda)
+                return venda;
+        }
 
+        return null;
+    }
+
+    public Aluguel_CarolineGabrielMariana getAluguel(int codigoAluguel)
+    {
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
+        {
+            if (aluguel.getCodigoAluguel() == codigoAluguel)
+                return aluguel;
+        }
+
+        return null;
+    }
 }

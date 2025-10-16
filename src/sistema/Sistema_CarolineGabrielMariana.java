@@ -48,7 +48,7 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("5. Vender Imóvel");
             System.out.println("6. Pagar Aluguel");
             System.out.println("7. Finalizar Aluguel");
-            System.out.println("8. Pagar Venda");
+            System.out.println("8. Finalizar Venda");
             System.out.println("9. Opções de Listagens");
             System.out.println("10. Remover Imóvel");
             System.out.println("11. Salvar Dados");
@@ -81,6 +81,14 @@ public class Sistema_CarolineGabrielMariana
                     break;
                 case 6:
                     pagarAluguel();
+                    salvarDados();
+                    break;
+                case 7:
+                    finalizarAluguel();
+                    salvarDados();
+                    break;
+                case 8:
+                    finalizarVenda();
                     salvarDados();
                     break;
                 case 9:
@@ -569,6 +577,40 @@ public class Sistema_CarolineGabrielMariana
         }
 
         
+    }
+
+    private void finalizarAluguel()
+    {
+        int codigoAluguel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Aluguel: ");
+
+        Aluguel_CarolineGabrielMariana aluguel = this.imobiliaria.getAluguel(codigoAluguel);
+
+        if (aluguel == null)
+        {
+            System.err.println("[FINALIZAR-ALUGUEL]: Não foi possível localizar o aluguel.");
+            return;
+        }
+
+        aluguel.setFinalizado(true);
+
+        System.out.println("\nAluguel finalizado com sucesso!");
+    }
+
+    private void finalizarVenda()
+    {
+        int codigoVenda = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código da Venda: ");
+
+        Venda_CarolineGabrielMariana venda = this.imobiliaria.getVenda(codigoVenda);
+
+        if (venda == null)
+        {
+            System.err.println("[FINALIZAR-VENDA]: Venda não encontrada.");
+            return;
+        }
+
+        venda.setFinalizada(true);
+
+        System.out.println("\nVenda finalizada com sucesso!\n");
     }
 
     private void opcoesDeListagem() 
