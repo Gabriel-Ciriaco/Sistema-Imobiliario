@@ -6,6 +6,7 @@ import imobiliaria.Imobiliaria_CarolineGabrielMariana;
 import imoveis.*;
 import servicos.Aluguel_CarolineGabrielMariana;
 import servicos.Seguro_CarolineGabrielMariana;
+import servicos.Venda_CarolineGabrielMariana;
 import transacoes.Cartao_CarolineGabrielMariana;
 import transacoes.Dinheiro_CarolineGabrielMariana;
 import transacoes.Pagamento_CarolineGabrielMariana;
@@ -594,20 +595,313 @@ public class Sistema_CarolineGabrielMariana
     }
 
     
-    private void listarImoveisAlugados() {}
-    private void listarImoveisDisponiveisParaVenda() {}
-    private void listarImoveisVendidos() {}
-    private void listarImoveisComAluguelEmAtraso() {}
-    private void listarImoveisAlugadosPorCliente() {}
-    private void listarImoveisCompradosPorCliente() {}
-    private void listarCorretoresCadastrados() {}
-    private void listarClientesCadastrados() {}
-    private void listarClientesComAluguelEmAtraso() {}
-    private void listarAlugueisFinalizados() {}
-    private void listarAlugueisDentroDoPrazo() {}
-    private void listarVendasRealizadas() {}
-    private void listarVendasPorMesComLucro() {}
-    private void listarSegurosCadastrados() {}
+    private void listarImoveisAlugados()
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveis = this.imobiliaria.getImoveisAlugados();
+
+        if (imoveis == null)
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-ALUGADOS]: Não há imóveis alugados. ");
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Alugados  ---");
+
+        for (Imovel_CarolineGabrielMariana imovel : imoveis) 
+        {
+            System.out.println("\n" + imovel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarImoveisDisponiveisParaVenda()
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveis = this.imobiliaria.getImoveisDisponiveisVenda();
+
+        if (imoveis == null)
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-DISPONIVEIS-PARA-VENDA]: Não há imóveis disponíveis para venda cadastrados.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Disponíveis para Venda  ---");
+
+        for (Imovel_CarolineGabrielMariana imovel : imoveis) 
+        {
+            System.out.println("\n" + imovel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarImoveisVendidos()
+    {
+        ArrayList<Imovel_CarolineGabrielMariana> imoveis = this.imobiliaria.getImoveisVendidos();
+
+        if (imoveis == null)
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-VENDIDOS]: Não há imóveis vendidos cadastrados.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Vendidos  ---");
+
+        for (Imovel_CarolineGabrielMariana imovel : imoveis) 
+        {
+            System.out.println("\n" + imovel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarImoveisComAluguelEmAtraso()
+    {
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueis = this.imobiliaria.getAlugueisAtrasados();
+
+        if (alugueis.isEmpty())
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-COM-ALUGUEL-EM-ATRASO]: Não há imóveis com aluguel em atraso.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Com Aluguel em Atraso  ---");
+
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis) 
+        {
+            System.out.println("\n" + aluguel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarImoveisAlugadosPorCliente()
+    {
+
+        int codigoUsuario = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Digite o código do usuário: ");
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueis = this.imobiliaria.getAlugueisClientes(codigoUsuario);
+
+        if (alugueis.isEmpty())
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-ALUGADOS-POR-CLIENTE]: Não há imóveis alugados por esse cliente.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Alugados por Cliente  ---");
+
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis) 
+        {
+            System.out.println("\n" + aluguel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+
+    }
+
+
+    private void listarImoveisCompradosPorCliente()
+    {
+        int codigoUsuario = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Digite o código do usuário: ");
+        ArrayList<Venda_CarolineGabrielMariana> vendas = this.imobiliaria.getComprasClientes(codigoUsuario);
+
+        if (vendas.isEmpty())
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-COMPRADOS-POR-CLIENTE]: Não há imóveis comprados por esse cliente.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Comprados por Cliente  ---");
+
+        for (Venda_CarolineGabrielMariana venda : vendas) 
+        {
+            System.out.println("\n" + venda.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarCorretoresCadastrados()
+    {
+        ArrayList<Corretor_CarolineGabrielMariana> corretores = this.imobiliaria.getCorretores();
+
+        if (corretores.isEmpty())
+        {
+            System.out.println("\n[LISTAR-CORRETORES]: Não há corretores cadastrados.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Corretores Cadastrados  ---");
+
+        for (Corretor_CarolineGabrielMariana corretor : corretores) 
+        {
+            System.out.println("\n" + corretor.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarClientesCadastrados() 
+    {
+        ArrayList<Cliente_CarolineGabrielMariana> clientes = this.imobiliaria.getClientes();
+
+        if (clientes.isEmpty())
+        {
+            System.out.println("\n[LISTAR-CLIENTES-CADASTRADOS]: Não há clientes cadastrados.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Clientes Cadastrados  ---");
+
+        for (Cliente_CarolineGabrielMariana cliente : clientes) 
+        {
+            System.out.println("\n" + cliente.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+    private void listarClientesComAluguelEmAtraso() 
+    {
+        ArrayList<Cliente_CarolineGabrielMariana> clientes = this.imobiliaria.getClientesAlugueisAtrasados();
+
+        if (clientes.isEmpty())
+        {
+            System.out.println("\n[LISTAR-CLIENTES-COM-ALUGUEL-EM-ATRASO]: Não há clientes com alugueis em atraso.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Clientes com Aluguel em Atraso  ---");
+
+        for (Cliente_CarolineGabrielMariana cliente : clientes) 
+        {
+            System.out.println("\n" + cliente.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+    private void listarAlugueisFinalizados()
+    {
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueis = this.imobiliaria.getAlugueisFinalizados();
+
+        if (alugueis.isEmpty())
+        {
+            System.out.println("\n[LISTAR-IMOVEIS-FINALIZADOS]: Não há alugueis finalizados.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Alugueis Finalizados  ---");
+
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis) 
+        {
+            System.out.println("\n" + aluguel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+    private void listarAlugueisDentroDoPrazo()
+    {
+        ArrayList<Aluguel_CarolineGabrielMariana> alugueis = this.imobiliaria.getAlugueisPrazoLocacao();
+
+        if (alugueis.isEmpty())
+        {
+            System.out.println("\n[LISTAR-ALUGUEIS-DENTRO-PRAZO]: Não há imóveis alugados que estão dentro do prazo.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Alugados que estão dentro do Prazo ---");
+
+        for (Aluguel_CarolineGabrielMariana aluguel : alugueis) 
+        {
+            System.out.println("\n" + aluguel.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarVendasRealizadas()
+    {
+        ArrayList<Venda_CarolineGabrielMariana> vendas = this.imobiliaria.getVendas();
+
+        if (vendas.isEmpty())
+        {
+            System.out.println("\n[LISTAR-VENDAS-REALIZADAS]: Não há nenhuma venda realizada.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Vendas Realizadas ---");
+
+        for (Venda_CarolineGabrielMariana venda : vendas) 
+        {
+            System.out.println("\n" + venda.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+
+    private void listarVendasPorMesComLucro()
+    {
+        int mes = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Digite o mês: ");
+
+        ArrayList<Venda_CarolineGabrielMariana> vendas = this.imobiliaria.getVendasMes(mes);
+
+        if (vendas.isEmpty())
+        {
+            System.out.println("\n[LISTAR-VENDAS-POR-MES]: Não há vendas nesse mês.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Imóveis Vendidos no Mês ---");
+
+        for (Venda_CarolineGabrielMariana venda : vendas) 
+        {
+            System.out.println("\n" + venda.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
+
+    private void listarSegurosCadastrados()
+    {
+        ArrayList<Seguro_CarolineGabrielMariana> seguros = this.imobiliaria.getSeguros();
+
+        if (seguros.isEmpty())
+        {
+            System.out.println("\n[LISTAR-SEGUROS-CADASTRADOS]: Não há seguros cadastrados.");
+
+            return;
+        }
+
+        System.out.println("\n\n--- Lista de Seguros Cadastrados  ---");
+
+        for (Seguro_CarolineGabrielMariana seguro : seguros) 
+        {
+            System.out.println("\n" + seguro.toString() + '\n');
+        }
+
+        Input_Utils_CarolineGabrielMariana.lerString(scanner, "Pressione qualquer botão para continuar... ", false);
+    }
 
 
 }
