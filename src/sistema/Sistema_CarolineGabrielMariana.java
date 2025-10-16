@@ -43,9 +43,11 @@ public class Sistema_CarolineGabrielMariana
             System.out.println("1. Cadastrar Corretor");
             System.out.println("2. Cadastrar Cliente");
             System.out.println("3. Cadastrar Imóvel");
-            System.out.println("4. Opções de Listagens");
-            System.out.println("5. Remover Imóvel");
-            System.out.println("6. Salvar Dados");
+            System.out.println("4. Alugar Imóvel");
+            System.out.println("5. Vender Imóvel");
+            System.out.println("6. Opções de Listagens");
+            System.out.println("7. Remover Imóvel");
+            System.out.println("8. Salvar Dados");
             System.out.println("0. Sair");
             
             opcao = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Escolha uma opção: ");
@@ -66,12 +68,18 @@ public class Sistema_CarolineGabrielMariana
                     salvarDados();
                     break;
                 case 4:
-                    opcoesDeListagem();
+                    alugarImoveis();
                     break;
                 case 5:
-                    removerImovel();
+                    //venderImovel();
                     break;
                 case 6:
+                    opcoesDeListagem();
+                    break;
+                case 7:
+                    removerImovel();
+                    break;
+                case 8:
                     salvarDados();
                     break;
 
@@ -275,12 +283,37 @@ public class Sistema_CarolineGabrielMariana
 
     private ArrayList<Seguro_CarolineGabrielMariana> selecionarSeguros()
     {
+        System.out.println("Selecione os seguros que deseja adicionar: ");
+
+        System.out.println("1. Cobertura total contra roubo");
+        
+        System.out.println("2. Cobertura contra enchentes");
+
+        System.out.println("3. Cobertura contra incêndios residenciais");
+
+        System.out.println("4. Cobertura total: roubo, incêndio, enchente, colisões e desastres naturais");
+
+        System.out.println("5. Nenhum.");
+
         int codigoSeguro = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Seguro: ");
         
+        ArrayList<Seguro_CarolineGabrielMariana> seguros = new ArrayList<Seguro_CarolineGabrielMariana>();
 
+        while (codigoSeguro != 5)
+        {
+            Seguro_CarolineGabrielMariana seguroSelecionado = imobiliaria.getSeguro(codigoSeguro);
 
-        return null;
+            if (seguroSelecionado != null)
+            {
+                seguros.add(seguroSelecionado);
+            }
+            else
+            {
+                System.out.println("Seguro não selecionado.");
+            }
+        }
         
+        return seguros;       
     }
 
     private Cartao_CarolineGabrielMariana cadastrarCartaoCliente()
@@ -313,7 +346,7 @@ public class Sistema_CarolineGabrielMariana
 
         while(corretor == null)
         {
-            System.out.println("\n[ALUGAR-ERROR]: Corretor não entrado. Por favor, tente novamente.");
+            System.out.println("\n[ALUGAR-ERROR]: Corretor não encontrado. Por favor, tente novamente.");
             
             codigoUsuarioCorretor = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do corretor: ");
 
@@ -326,7 +359,7 @@ public class Sistema_CarolineGabrielMariana
 
         while(cliente == null)
         {
-            System.out.println("\n[ALUGAR-ERROR]: Cliente não entrado. Por favor, tente novamente.");
+            System.out.println("\n[ALUGAR-ERROR]: Cliente não encontrado. Por favor, tente novamente.");
             
             codigoUsuarioCliente = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código de usuário do cliente: ");
 
@@ -340,7 +373,7 @@ public class Sistema_CarolineGabrielMariana
 
         while(imovel== null)
         {
-            System.out.println("\n[ALUGAR-ERROR]: Imóvel não entrado. Por favor, tente novamente.");
+            System.out.println("\n[ALUGAR-ERROR]: Imóvel não encontrado. Por favor, tente novamente.");
             
             codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Imóvel: ");
 
@@ -398,6 +431,10 @@ public class Sistema_CarolineGabrielMariana
                                                     valorTotalAluguel, formaPagamento , this.selecionarSeguros(), false, false);
 
 
+        if (this.imobiliaria.getAlugueis() != null)
+            this.imobiliaria.getAlugueis().add(novoAluguel);
+        else
+            System.err.println("\n[ALUGAR-IMOVEIS]: Ocorreu um erro interno ao alugar o imóvel.");
     }
 
     private void opcoesDeListagem() 

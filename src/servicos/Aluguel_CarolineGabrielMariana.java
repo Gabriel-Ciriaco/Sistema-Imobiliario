@@ -231,7 +231,10 @@ public class Aluguel_CarolineGabrielMariana implements Serializable
     {
         LocalDate diaHoje = LocalDate.now();
 
-        if(diaHoje.isAfter(this.getDataPagamentoMensal()))
+        if (!finalizado &&
+            !pago &&
+            diaHoje.isAfter(this.getDataPagamentoMensal())
+           )
         {
             return true;
         }

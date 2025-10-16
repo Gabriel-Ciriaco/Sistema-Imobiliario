@@ -395,12 +395,8 @@ public class Imobiliaria_CarolineGabrielMariana
 
         for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
         {
-            if (!aluguel.isFinalizado() &&
-                !aluguel.isPago() && 
-                aluguel.getDataPagamentoMensal().isBefore(LocalDate.now()))
-                {
-                    alugueisAtrasados.add(aluguel);
-                }
+            if (aluguel.verificarAtraso())
+                alugueisAtrasados.add(aluguel);
         }
 
         return alugueisAtrasados;
@@ -437,7 +433,7 @@ public class Imobiliaria_CarolineGabrielMariana
         
         for (Aluguel_CarolineGabrielMariana aluguel : alugueis)
         {
-            if (aluguel.getDataDevolucao().isAfter(LocalDate.now()))
+            if (!aluguel.verificarAtraso())
                 alugueisPrazoLocacao.add(aluguel);
         }
 
