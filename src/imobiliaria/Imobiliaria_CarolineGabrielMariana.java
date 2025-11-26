@@ -1,6 +1,5 @@
 package imobiliaria;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import configuracoes.Configuracao_CarolineGabrielMariana;
@@ -18,7 +17,7 @@ import usuarios.Corretor_CarolineGabrielMariana;
 
 
 
-public class Imobiliaria_CarolineGabrielMariana
+public final class Imobiliaria_CarolineGabrielMariana
 {
     private String nome;
     
@@ -40,7 +39,23 @@ public class Imobiliaria_CarolineGabrielMariana
     private Configuracao_CarolineGabrielMariana configuracoes;
 
 
-    public Imobiliaria_CarolineGabrielMariana()
+    private static Imobiliaria_CarolineGabrielMariana instance;
+
+
+    /*
+        Implementando o conceito de singleton.
+    */
+    public static Imobiliaria_CarolineGabrielMariana getInstance()
+    {
+        if (instance == null)
+        {
+            return new Imobiliaria_CarolineGabrielMariana();
+        }
+
+        return instance;
+    }
+
+    private Imobiliaria_CarolineGabrielMariana()
     {
         this.nome = "";
 
@@ -60,68 +75,6 @@ public class Imobiliaria_CarolineGabrielMariana
 
         this.seguros = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoSeguros());
     }
-
-    public Imobiliaria_CarolineGabrielMariana(String nome, String endereco)
-    {
-        this.nome = nome;
-
-        this.endereco = endereco;
-        
-        this.configuracoes = new Configuracao_CarolineGabrielMariana();
-
-        this.alugueis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoAlugueis());
-
-        this.vendas = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoVendas());
-
-        this.imoveis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoImoveis());
-        
-        this.clientes = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoClientes());
-        
-        this.corretores = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoCorretores());
-
-        this.seguros = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoSeguros());
-    }
-
-    public Imobiliaria_CarolineGabrielMariana(
-            String nome, String endereco,
-            ArrayList<Aluguel_CarolineGabrielMariana> alugueis, ArrayList<Venda_CarolineGabrielMariana> vendas,
-            ArrayList<Imovel_CarolineGabrielMariana> imoveis, ArrayList<Cliente_CarolineGabrielMariana> clientes,
-            ArrayList<Corretor_CarolineGabrielMariana> corretores, ArrayList<Seguro_CarolineGabrielMariana> seguros,
-            Configuracao_CarolineGabrielMariana configuracoes
-        )
-    {
-        this.nome = nome;
-        
-        this.endereco = endereco;
-
-        this.alugueis = alugueis;
-
-
-        this.vendas = vendas;
-
-        this.imoveis = imoveis;
-
-        this.clientes = clientes;
-
-        this.corretores = corretores;
-
-        this.seguros = seguros;
-
-        this.configuracoes = configuracoes;
-
-        this.alugueis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoAlugueis());
-
-        this.vendas = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoVendas());
-
-        this.imoveis = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoImoveis());
-        
-        this.clientes = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoClientes());
-        
-        this.corretores = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoCorretores());
-
-        this.seguros = Desserializador_CarolineGabrielMariana.carregarObjeto(this.configuracoes.getArquivoSeguros());
-    }
-
 
     public String getNome() {
         return nome;

@@ -29,7 +29,10 @@ public class Sistema_CarolineGabrielMariana
     
     public Sistema_CarolineGabrielMariana() 
     {
-        this.imobiliaria = new Imobiliaria_CarolineGabrielMariana();
+        this.imobiliaria = Imobiliaria_CarolineGabrielMariana.getInstance();
+
+        this.imobiliaria.setNome("CaMaRiel Imóveis");
+
         this.scanner = new Scanner(System.in);
     }
 
@@ -40,7 +43,7 @@ public class Sistema_CarolineGabrielMariana
 
         do 
         {
-            System.out.println("\n--- Sistema Imobiliaria ---");
+            System.out.println("\n--- Sistema " + this.imobiliaria.getNome() + "---");
             System.out.println("1. Cadastrar Corretor");
             System.out.println("2. Cadastrar Cliente");
             System.out.println("3. Cadastrar Imóvel");
