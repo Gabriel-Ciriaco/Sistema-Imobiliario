@@ -6,33 +6,41 @@ package usuarios;
 
 import java.time.LocalDate;
 
+enum TipoUsuario
+{
+    Cliente,
+    Corretor
+};
+
 public class UsuarioCreator_CarolineGabrielMariana {
     public static Usuario_CarolineGabrielMariana criarUsuario(
-            int tipo, int codigoUsuario, String nome, String cpf, String rg,
+            TipoUsuario tipo, int codigoUsuario, String nome, String cpf, String rg,
             LocalDate dataNascimento, String endereco, String cep, String telefone, 
-            String email, String identificador, float salario, String pis, 
-            LocalDate dataEspecial) {
-        
-        UserFactory_CarolineGabrielMariana factory;
+            String email, LocalDate dataCadastro, String creci, Float salario,
+            String pis, LocalDate dataAdmissao) {
 
         switch (tipo) {
-            case 1: // Cliente
-                factory = new ClienteFactory_CarolineGabrielMariana(
-                    codigoUsuario, nome, cpf, rg, dataNascimento, 
-                    endereco, cep, telefone, email, dataEspecial
+            case TipoUsuario.Cliente: // Cliente
+                return new Cliente_CarolineGabrielMariana(
+                    codigoUsuario,
+                    nome,
+                    cpf,
+                    rg,
+                    dataNascimento,
+                    endereco,
+                    cep,
+                    telefone,
+                    email,
+                    dataCadastro
                 );
-                break;
-            case 2: // Corretor
-                factory = new CorretorFactory_CarolineGabrielMariana(
+
+            case TipoUsuario.Corretor: // Corretor
+                return new Corretor_CarolineGabrielMariana(
                     codigoUsuario, nome, cpf, rg, dataNascimento,
-                    endereco, cep, telefone, email, identificador, 
-                    salario, pis, dataEspecial
-                );
-                break;
+                    endereco, cep, telefone, email, creci, salario, pis, dataAdmissao);
+
             default:
                 throw new IllegalArgumentException("Tipo de usuário inválido: " + tipo);
         }
-
-        return factory.criarUsuario();
     }
 }
