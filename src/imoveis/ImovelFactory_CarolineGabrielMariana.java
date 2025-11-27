@@ -4,6 +4,12 @@ import java.time.LocalDate;
 
 public class ImovelFactory_CarolineGabrielMariana 
 {
+    /**
+     * Foram utilizados as classes Integer, Float e Float
+     * para certos parâmetros a fim de permitir de deixar
+     * parâmetros nulos. Consequentemente, conseguimos utilizar
+     * criarImovel para todos os tipos de imóveis.
+     */
     public static Imovel_CarolineGabrielMariana criarImovel(int tipoImovel, int codigoImovel, 
                     String endereco, LocalDate dataConstrucao, float areaTotal, float areaConstruida, 
                     int qtdDormitorios, int qtdBanheiros, int qtdVagasGaragem, float valorIPTU, 
