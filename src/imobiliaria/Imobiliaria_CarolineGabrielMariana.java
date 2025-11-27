@@ -14,6 +14,7 @@ import servicos.Venda_CarolineGabrielMariana;
 
 import usuarios.Cliente_CarolineGabrielMariana;
 import usuarios.Corretor_CarolineGabrielMariana;
+import usuarios.Usuario_CarolineGabrielMariana;
 
 
 
@@ -30,9 +31,9 @@ public final class Imobiliaria_CarolineGabrielMariana
 
     private ArrayList<Imovel_CarolineGabrielMariana> imoveis;
 
-    private ArrayList<Cliente_CarolineGabrielMariana> clientes;
+    private ArrayList<Usuario_CarolineGabrielMariana> clientes;
 
-    private ArrayList<Corretor_CarolineGabrielMariana> corretores;
+    private ArrayList<Usuario_CarolineGabrielMariana> corretores;
 
     private ArrayList<Seguro_CarolineGabrielMariana> seguros;
 
@@ -136,22 +137,22 @@ public final class Imobiliaria_CarolineGabrielMariana
         return null;
     }
 
-    public ArrayList<Cliente_CarolineGabrielMariana> getClientes() {
+    public ArrayList<Usuario_CarolineGabrielMariana> getClientes() {
         return clientes;
     }
 
 
-    public void setClientes(ArrayList<Cliente_CarolineGabrielMariana> clientes) {
+    public void setClientes(ArrayList<Usuario_CarolineGabrielMariana> clientes) {
         this.clientes = clientes;
     }
 
 
-    public ArrayList<Corretor_CarolineGabrielMariana> getCorretores() {
+    public ArrayList<Usuario_CarolineGabrielMariana> getCorretores() {
         return corretores;
     }
 
 
-    public void setCorretores(ArrayList<Corretor_CarolineGabrielMariana> corretores) {
+    public void setCorretores(ArrayList<Usuario_CarolineGabrielMariana> corretores) {
         this.corretores = corretores;
     }
 
@@ -292,10 +293,10 @@ public final class Imobiliaria_CarolineGabrielMariana
     
     public Cliente_CarolineGabrielMariana getCliente(int codigoUsuario)
     {
-        for (Cliente_CarolineGabrielMariana cliente : clientes)
+        for (Usuario_CarolineGabrielMariana cliente : clientes)
         {
             if (codigoUsuario == cliente.getCodigoUsuario())
-                return cliente;
+                return (Cliente_CarolineGabrielMariana) cliente;
         }
 
         return null;
@@ -303,10 +304,10 @@ public final class Imobiliaria_CarolineGabrielMariana
 
     public Corretor_CarolineGabrielMariana getCorretor(int codigoUsuario)
     {
-        for (Corretor_CarolineGabrielMariana corretor : corretores)
+        for (Usuario_CarolineGabrielMariana corretor : corretores)
         {
             if (codigoUsuario == corretor.getCodigoUsuario())
-                return corretor;
+                return (Corretor_CarolineGabrielMariana) corretor;
         }
 
         return null;

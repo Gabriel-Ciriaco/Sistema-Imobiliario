@@ -13,6 +13,7 @@ import transacoes.Pagamento_CarolineGabrielMariana;
 import usuarios.Cliente_CarolineGabrielMariana;
 import usuarios.Corretor_CarolineGabrielMariana;
 import usuarios.UsuarioCreator_CarolineGabrielMariana;
+import usuarios.Usuario_CarolineGabrielMariana;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -293,8 +294,7 @@ public class Sistema_CarolineGabrielMariana
         {
             case 1:
 
-                Cliente_CarolineGabrielMariana novoCliente =
-                    (Cliente_CarolineGabrielMariana) UsuarioCreator_CarolineGabrielMariana.criarUsuario(
+                 Usuario_CarolineGabrielMariana novoCliente = UsuarioCreator_CarolineGabrielMariana.criarUsuario(
                         tipo, codigoUsuario, nome, cpf, rg, dataNascimento,
                         endereco, cep, telefone, email,
                       null, null, null, null);
@@ -318,8 +318,7 @@ public class Sistema_CarolineGabrielMariana
                 LocalDate dataAdmissao = Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
                                                         "Data de Admissão (Formato: YYYY-MM-DD): ");
 
-                Corretor_CarolineGabrielMariana novoCorretor =
-                (Corretor_CarolineGabrielMariana) UsuarioCreator_CarolineGabrielMariana.criarUsuario(
+                Usuario_CarolineGabrielMariana novoCorretor = UsuarioCreator_CarolineGabrielMariana.criarUsuario(
                     tipo, codigoUsuario, nome, cpf, rg, dataNascimento,
                     endereco, cep, telefone, email,
                     creci, salario, pis, dataAdmissao);
@@ -990,7 +989,7 @@ public class Sistema_CarolineGabrielMariana
 
     private void listarCorretoresCadastrados()
     {
-        ArrayList<Corretor_CarolineGabrielMariana> corretores = this.imobiliaria.getCorretores();
+        ArrayList<Usuario_CarolineGabrielMariana> corretores = this.imobiliaria.getCorretores();
 
         if (corretores.isEmpty())
         {
@@ -1001,7 +1000,7 @@ public class Sistema_CarolineGabrielMariana
 
         System.out.println("\n\n--- Lista de Corretores Cadastrados  ---");
 
-        for (Corretor_CarolineGabrielMariana corretor : corretores) 
+        for (Usuario_CarolineGabrielMariana corretor : corretores) 
         {
             System.out.println("\n" + corretor.toString() + '\n');
         }
@@ -1012,7 +1011,7 @@ public class Sistema_CarolineGabrielMariana
 
     private void listarClientesCadastrados() 
     {
-        ArrayList<Cliente_CarolineGabrielMariana> clientes = this.imobiliaria.getClientes();
+        ArrayList<Usuario_CarolineGabrielMariana> clientes = this.imobiliaria.getClientes();
 
         if (clientes.isEmpty())
         {
@@ -1023,7 +1022,7 @@ public class Sistema_CarolineGabrielMariana
 
         System.out.println("\n\n--- Lista de Clientes Cadastrados  ---");
 
-        for (Cliente_CarolineGabrielMariana cliente : clientes) 
+        for (Usuario_CarolineGabrielMariana cliente : clientes) 
         {
             System.out.println("\n" + cliente.toString() + '\n');
         }
