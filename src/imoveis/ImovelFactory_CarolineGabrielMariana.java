@@ -17,18 +17,18 @@ public class ImovelFactory_CarolineGabrielMariana
                 return new CasaResidencial_CarolineGabrielMariana(codigoImovel, endereco, dataConstrucao, 
                             areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, qtdVagasGaragem, 
                             valorIPTU, valorVenda, valorAluguel);
-                
+                            
             case 2:
+                
+                return new PredioResidencial_CarolineGabrielMariana(codigoImovel, endereco, dataConstrucao, 
+                            areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, qtdVagasGaragem, valorIPTU, 
+                            valorVenda, valorAluguel, andar, valorCondominio);
+                
+            case 3:
 
                 return new Comercial_CarolineGabrielMariana(codigoImovel, endereco, dataConstrucao, 
                             areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, qtdVagasGaragem, 
                             valorIPTU, valorVenda, valorAluguel, taxaImpostoFederal);
-
-            case 3:
-
-                return new PredioResidencial_CarolineGabrielMariana(codigoImovel, endereco, dataConstrucao, 
-                            areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, qtdVagasGaragem, valorIPTU, 
-                            valorVenda, valorAluguel, andar, valorCondominio);
             default:
 
                 System.out.println("Tipo de imóvel inexistente!");
