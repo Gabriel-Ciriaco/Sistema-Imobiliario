@@ -6,21 +6,16 @@ package usuarios;
 
 import java.time.LocalDate;
 
-enum TipoUsuario
+public class UsuarioCreator_CarolineGabrielMariana
 {
-    Cliente,
-    Corretor
-};
-
-public class UsuarioCreator_CarolineGabrielMariana {
     public static Usuario_CarolineGabrielMariana criarUsuario(
-            TipoUsuario tipo, int codigoUsuario, String nome, String cpf, String rg,
+            int tipo, int codigoUsuario, String nome, String cpf, String rg,
             LocalDate dataNascimento, String endereco, String cep, String telefone, 
-            String email, LocalDate dataCadastro, String creci, Float salario,
+            String email, String creci, Float salario,
             String pis, LocalDate dataAdmissao) {
 
         switch (tipo) {
-            case TipoUsuario.Cliente: // Cliente
+            case 1: // Cliente
                 return new Cliente_CarolineGabrielMariana(
                     codigoUsuario,
                     nome,
@@ -31,10 +26,10 @@ public class UsuarioCreator_CarolineGabrielMariana {
                     cep,
                     telefone,
                     email,
-                    dataCadastro
+                    LocalDate.now()
                 );
 
-            case TipoUsuario.Corretor: // Corretor
+            case 2: // Corretor
                 return new Corretor_CarolineGabrielMariana(
                     codigoUsuario, nome, cpf, rg, dataNascimento,
                     endereco, cep, telefone, email, creci, salario, pis, dataAdmissao);
