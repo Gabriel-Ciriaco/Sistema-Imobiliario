@@ -13,7 +13,7 @@ import java.lang.ClassNotFoundException;
 
 
 
-public class Desserializador_CarolineGabrielMariana
+public final class Desserializador_CarolineGabrielMariana
 {
 
     @SuppressWarnings("unchecked") // Remove o aviso de cast inseguro.

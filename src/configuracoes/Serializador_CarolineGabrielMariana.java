@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 
-public class Serializador_CarolineGabrielMariana
+public final class Serializador_CarolineGabrielMariana
 {
     public static <T extends Serializable> void salvarObjeto(T objeto, String caminhoArquivo)
     {
