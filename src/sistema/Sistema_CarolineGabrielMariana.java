@@ -12,7 +12,7 @@ import transacoes.Dinheiro_CarolineGabrielMariana;
 import transacoes.Pagamento_CarolineGabrielMariana;
 import usuarios.Cliente_CarolineGabrielMariana;
 import usuarios.Corretor_CarolineGabrielMariana;
-import usuarios.Usuario_CarolineGabrielMariana;
+import usuarios.UsuarioCreator_CarolineGabrielMariana;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -63,11 +63,11 @@ public class Sistema_CarolineGabrielMariana
             switch (opcao) 
             {
                 case 1:
-                    cadastrarCorretor();
+                    cadastrarUsuario(2);
                     salvarDados();
                     break;
                 case 2:
-                    cadastrarCliente();
+                    cadastrarUsuario(1);
                     salvarDados();
                     break;
                 case 3:
@@ -260,7 +260,7 @@ public class Sistema_CarolineGabrielMariana
         System.out.println("\nDados salvos com sucesso!");
     }
 
-    private Usuario_CarolineGabrielMariana cadastrarUsuario()
+    private void cadastrarUsuario(int tipo)
     {
         int codigoUsuario = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Código do Usuário: ");
         
@@ -289,41 +289,51 @@ public class Sistema_CarolineGabrielMariana
 
         String email = Input_Utils_CarolineGabrielMariana.lerString(scanner, "E-mail: ", false);
 
-        return new Usuario_CarolineGabrielMariana(
-            codigoUsuario, nome, cpf, rg, dataNascimento, endereco, cep, telefone, email);
+        switch (tipo)
+        {
+            case 1:
+
+                Cliente_CarolineGabrielMariana novoCliente =
+                    (Cliente_CarolineGabrielMariana) UsuarioCreator_CarolineGabrielMariana.criarUsuario(
+                        tipo, codigoUsuario, nome, cpf, rg, dataNascimento,
+                        endereco, cep, telefone, email,
+                      null, null, null, null);
+
+                this.imobiliaria.getClientes().add(novoCliente);
+                break;
+
+            case 2:
+
+                String creci = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                                                                    "Creci do corretor: ",
+                                                                false
+                                                                            );
+
+                float salario = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Salário do corretor: ");
+
+                String pis = Input_Utils_CarolineGabrielMariana.lerString(scanner,
+                                                                    "Pis do corretor: ",
+                                                                false
+                                                                            );
+                LocalDate dataAdmissao = Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
+                                                        "Data de Admissão (Formato: YYYY-MM-DD): ");
+
+                Corretor_CarolineGabrielMariana novoCorretor =
+                (Corretor_CarolineGabrielMariana) UsuarioCreator_CarolineGabrielMariana.criarUsuario(
+                    tipo, codigoUsuario, nome, cpf, rg, dataNascimento,
+                    endereco, cep, telefone, email,
+                    creci, salario, pis, dataAdmissao);
+
+                this.imobiliaria.getCorretores().add(novoCorretor);
+                break;
+        
+        
+            default:
+                System.err.println("\n[CADASTRAR-USUARIO]: Não foi possível cadastrar o usuário desejado.\n");
+                break;
+        }
     }
 
-    private void cadastrarCorretor()
-    {
-        String creci = Input_Utils_CarolineGabrielMariana.lerString(scanner,
-                                                              "Creci do corretor: ",
-                                                         false
-                                                                      );
-
-        float salario = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Salário do corretor: ");
-
-        String pis = Input_Utils_CarolineGabrielMariana.lerString(scanner,
-                                                              "Pis do corretor: ",
-                                                         false
-                                                                      );
-        LocalDate dataAdmissao = Input_Utils_CarolineGabrielMariana.lerLocalDate(scanner,
-                                                "Data de Admissão (Formato: YYYY-MM-DD): ");
-        
-        Corretor_CarolineGabrielMariana novoCorretor = new Corretor_CarolineGabrielMariana(
-            this.cadastrarUsuario(), creci, salario, pis, dataAdmissao);
-
-        this.imobiliaria.getCorretores().add(novoCorretor);
-        
-    }
-
-    private void cadastrarCliente()
-    {
-        Cliente_CarolineGabrielMariana novoCliente = new Cliente_CarolineGabrielMariana(
-            this.cadastrarUsuario(), LocalDate.now());
-        
-        this.imobiliaria.getClientes().add(novoCliente);
-        
-    }
 
     private ArrayList<Seguro_CarolineGabrielMariana> selecionarSeguros()
     {
