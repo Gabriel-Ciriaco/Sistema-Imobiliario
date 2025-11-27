@@ -1,13 +1,4 @@
-import java.util.ArrayList;
-
-import configuracoes.Serializador_CarolineGabrielMariana;
-import imoveis.Imovel_CarolineGabrielMariana;
-import servicos.Aluguel_CarolineGabrielMariana;
-import servicos.Seguro_CarolineGabrielMariana;
-import servicos.Venda_CarolineGabrielMariana;
 import sistema.Sistema_CarolineGabrielMariana;
-import usuarios.Cliente_CarolineGabrielMariana;
-import usuarios.Corretor_CarolineGabrielMariana;
 
 public class Main
 {
