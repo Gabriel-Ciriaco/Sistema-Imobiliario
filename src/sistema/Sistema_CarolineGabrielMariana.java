@@ -130,6 +130,8 @@ public class Sistema_CarolineGabrielMariana
             
             codigoImovel = Input_Utils_CarolineGabrielMariana.lerInt(scanner,"Código do Imóvel: ");
         }
+
+        // Coletando dados que são comuns a todos os imóveis. 
  
         String endereco = Input_Utils_CarolineGabrielMariana.lerString(scanner,
                                                               "Endereço do Imóvel: ",
@@ -157,38 +159,31 @@ public class Sistema_CarolineGabrielMariana
         
         float valorAluguel = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor de Aluguel: ");
         
-        Imovel_CarolineGabrielMariana novoImovel = null;
+        //Coletando dados específicos para Comerciais e Predio 
+        Integer andar = null;
+        Float valorCondominio = null;
+        Float taxaImpostoFederal = null;
 
         switch (tipo)
         {
-            case 1:
-                novoImovel =
-                 (CasaResidencial_CarolineGabrielMariana) new CasaResidencial_CarolineGabrielMariana(codigoImovel,
-                  endereco, dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, qtdVagasGaragem,
-                   valorIPTU, valorVenda, valorAluguel);
-
-                break;
             
             case 2:
-                int andar = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Andar do Imóvel: ");
-                float valorCondominio = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor do Condomínio: ");
-
-                novoImovel = (PredioResidencial_CarolineGabrielMariana) new PredioResidencial_CarolineGabrielMariana(
-                    codigoImovel, endereco, dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros,
-                     qtdVagasGaragem, valorIPTU, valorVenda, valorAluguel, andar, valorCondominio);
+                andar = Input_Utils_CarolineGabrielMariana.lerInt(scanner, "Andar do Imóvel: ");
+                valorCondominio = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Valor do Condomínio: ");
 
                 break;
             
             case 3:
-                float taxaImpostoFederal = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Taxa do Imposto Federal: ");
+                taxaImpostoFederal = Input_Utils_CarolineGabrielMariana.lerFloat(scanner, "Taxa do Imposto Federal: ");
     
-                novoImovel = (Comercial_CarolineGabrielMariana) new Comercial_CarolineGabrielMariana(codigoImovel, endereco,
-                 dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, qtdVagasGaragem,
-                  valorIPTU, valorVenda, valorAluguel, taxaImpostoFederal);
-
                 break;            
             
         }
+
+        Imovel_CarolineGabrielMariana novoImovel = ImovelFactory_CarolineGabrielMariana.criarImovel(tipo, codigoImovel, 
+                                        endereco, dataConstrucao, areaTotal, areaConstruida, qtdDormitorios, qtdBanheiros, 
+                                        qtdVagasGaragem, valorIPTU, valorVenda, valorAluguel, andar, valorCondominio, 
+                                        taxaImpostoFederal);
 
         if (novoImovel == null)
             System.err.println("\n[CADASTRO-IMÓVEL-ERROR]: Houve algum erro interno ao cadastra o imóvel");
